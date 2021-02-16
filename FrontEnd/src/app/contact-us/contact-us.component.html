@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Contact Us</h2>
+    </div>
+    <form
+      class="card-body"
+      [formGroup]="contactUsForm"
+      (ngSubmit)="submitContact()"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Name..."
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Email..."
+
+        />
+      </div>
+
+      <div class="form-group">
+        <textarea
+          class="form-control"
+          name="message"
+          formControlName="message"
+          rows="3"
+          placeholder="Message..."
+
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn">Send</button>
+        <button
+          type="button"
+          (click)="resetBtn()"
+          style="margin-left: 10px"
+          class="btn"
+        >
+          reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

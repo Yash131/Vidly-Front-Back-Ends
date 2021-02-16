@@ -1,0 +1,31 @@
+<button class="btn btn-primary" routerLink="/genres/listing">Go Back</button>
+
+<div class="container">
+    <div class="card" style="margin-bottom: 80px">
+      <div class="card-header">
+        <h4>Enter Genre</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="genreForm" (ngSubmit)="createGenre()">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              id="name"
+              placeholder="Genre.."
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button
+            class="btn btn-dark bg-dark"
+            style="margin-left: 10px"
+            type="button"
+            (click)='resetBtnHandler()'
+          >
+            Reset
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>

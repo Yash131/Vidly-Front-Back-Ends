@@ -1,0 +1,27 @@
+<!-- <div class="btn-group dropright" >
+    <button type="button" class="btn btn-secondary">
+      Genres
+    </button>
+    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropright</span>
+    </button>
+    <div class="dropdown-menu" >
+        <a class="dropdown-item" *ngFor="let genre of genres">{{genre.name}}</a>
+    </div>
+</div> -->
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3">
+      <ng-select [items]="genres"
+           bindLabel="name"
+           bindValue="id"
+           [(ngModel)]="selectedGenre"
+           dropdownPosition="bottom"
+           [multiple]="false"
+           placeholder="Select Genre">
+      </ng-select>
+    </div>
+    <div class="col-9"></div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<button class="btn btn-primary" routerLink="/adminPanel">Go Back</button>
+
+<div class="container">
+  <div class="form-group">
+    <input type="text" (keyup)="filter(search.value)" #search id="search" class="form-control" placeholder="Serch Genre">
+  </div>
+
+  <table class="table tabel-bordered  table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Message</th>
+        <th scope="col">Date</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let p of filteredContact">
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.message }}</td>
+        <td>{{ p.date | date}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="delBtnHandler(p._id)"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

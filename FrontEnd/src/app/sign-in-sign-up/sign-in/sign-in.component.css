@@ -1,0 +1,48 @@
+#cardImg {
+  display: block;
+  margin: auto;
+  width: 200px;
+}
+form {
+  margin-top: 30px;
+}
+form input {
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 0;
+}
+form input:focus {
+  border: none;
+  box-shadow: none;
+  border-bottom: 3px solid #fc85ae;
+  border-radius: 0;
+}
+
+form input::placeholder {
+  color: black;
+}
+
+form input:focus::placeholder {
+  color: #fc85ae;
+}
+
+button {
+  background-color: #fc85ae;
+  border: 2px solid white;
+  font-weight: 500px;
+  border-radius: 20px;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  width: -webkit-fill-available;
+}
+
+button:hover {
+  background-color: white;
+  border: 2px solid #fc85ae;
+  color: #fc85ae;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+input:read-only {
+  background-color: transparent;
+}

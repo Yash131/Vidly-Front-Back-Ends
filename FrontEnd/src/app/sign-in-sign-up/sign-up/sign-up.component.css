@@ -1,0 +1,28 @@
+.btn{
+    padding: 10px;
+    font-weight: 500px;
+    border-radius: 4px;
+    width: -webkit-fill-available;
+}
+
+form input{
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+}
+form input:focus{
+    box-shadow: none;
+    border-bottom: 2px solid rgb(131, 200, 247);
+
+}
+form input::placeholder{
+    color: black;
+}
+
+form input:focus::placeholder{
+    color: rgb(131, 200, 247);
+}
+
+input:read-only {
+  background-color: transparent;
+}

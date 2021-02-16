@@ -1,0 +1,77 @@
+.card {
+  display: block;
+  margin: auto;
+  width: auto;
+}
+
+.card-header{
+    color: #fc85ae;
+}
+
+select{
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 0;
+}
+
+select:focus{
+    border: none;
+    box-shadow: none;
+    border-bottom: 3px solid #fc85ae;
+    border-radius: 0;
+}
+
+select option .active{
+    margin-bottom: 5px;
+    background-color: #fc85ae;
+    color: white;
+}
+
+select option{
+    margin-bottom: 5px;
+    background-color: white;
+    color: #fc85ae;
+}
+
+select option:hover{
+    margin-bottom: 5px;
+    background-color: #fc85ae;
+    color: white;
+}
+
+
+form input{
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 0;
+}
+
+form input:focus{
+    border: none;
+    box-shadow: none;
+    border-bottom: 3px solid #fc85ae;
+    border-radius: 0;
+}
+
+form input::placeholder{
+    color: black;
+}
+
+form input:focus::placeholder{
+    color: #fc85ae;
+}
+
+button {
+  background-color: #fc85ae;
+  border: 2px solid white;
+  font-weight: 500px;
+  border-radius: 20px;
+  color: white;
+}
+
+button:hover {
+  background-color: white;
+  border: 2px solid #fc85ae;
+  color: #fc85ae;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}

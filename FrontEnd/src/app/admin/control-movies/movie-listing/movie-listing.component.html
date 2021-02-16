@@ -1,0 +1,136 @@
+<button style="margin-top: 10px" routerLink="/adminPanel" class="btn btn-dark">
+  <i
+    class="fa fa-long-arrow-left"
+    aria-hidden="true"
+    style="margin-right: 5px"
+  ></i
+  >Back
+</button>
+
+<button
+  class="btn btn-success"
+  style="margin: 10px 0 0 10px"
+  routerLink="/movies/form/new"
+>
+  <i class="fa fa-plus-circle" aria-hidden="true" style="margin-right: 5px"></i
+  >Movie
+</button>
+
+<!-- <div class="container">
+  <div class="card-group">
+    <div class="card text-center" *ngFor="let movie of movies" id="card">
+      <img class="card-img-top" [src]="movie.imageUrl" alt="" />
+
+      <span class="badge badge-info" style="border-radius: 0; font-weight: 500"
+        >Stock : {{ movie.numberInStock }}</span
+      >
+
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+
+        <div class="card-subtitle mb-2 text-muted">
+          <span> <b>Genre</b> : {{ movie.genre.name }} </span>,
+          <span><b>Rating</b> : {{ movie.rating }}/5</span>
+        </div>
+
+        <div class="card-text">
+          <span class="btn btn-transparent">
+            <b>Rental Rate</b> : {{ movie.dailyRentalRate | currency }}
+          </span>
+          <span class="btn btn-transparent">
+            <b>Price</b> : {{ movie.price | currency }}</span
+          >
+        </div>
+
+        <div>
+          <p class="card-text"><b>Summery</b> : {{ movie.summery }}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <a
+            (click)="trailerPopUp(movie.trailerUrl)"
+            class="btn btn-block btn-dark"
+          >
+            <i class="fa fa-youtube"></i> Watch Trailer</a
+          >
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <a
+            style="margin-right: 40px"
+            (click)="editBtnHandler(movie._id)"
+            class="btn btn-warning"
+            >Edit</a
+          >
+          <a class="btn btn-danger" (click)="delBtnHandler(movie._id)"
+            >delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container mt-5">
+  <div class="card mb-5" *ngFor="let movie of movies">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+        <img [src]="movie.imageUrl" alt="" />
+      </div>
+      <div class="col-12 col-sm-12 col-lg-9 col-md-9">
+        <div class="card-body">
+          <h2 class="card-title">{{ movie.title }}</h2>
+          <h3 class="card-title text-muted">
+            Genre :
+            <span class="text-muted">{{ movie.genre.name }}</span>
+          </h3>
+          <p class="card-text">{{ movie.summery }}</p>
+          <div>
+            <span class="mr-3">
+              <b>Rental Rate</b> : {{ movie.dailyRentalRate | currency }}
+            </span>
+            <span class="mr-3">
+              <b>Price</b> : {{ movie.price | currency }}</span
+            >
+            <span
+              class="badge badge-info"
+              style="border-radius: 0; font-weight: 500"
+              >Stock : {{ movie.numberInStock }}</span
+            >
+            <div>
+              <div class="mt-1">
+                <button
+                  (click)="trailerPopUp(movie.trailerUrl)"
+                  class="btn btn-dark"
+                >
+                  <i class="fa fa-youtube"></i> Watch Trailer
+                </button>
+              </div>
+
+              <div class="mt-3">
+                <span>
+                  <div>
+                    <button
+                      (click)="editBtnHandler(movie._id)"
+                      class="btn mr-2"
+                    ><i class="fa fa-pencil" aria-hidden="true"></i>
+                      Edit
+                    </button>
+                    <button
+                      class="btn"
+                      (click)="delBtnHandler(movie._id)"
+                    ><i class="fa fa-trash" aria-hidden="true"></i>
+                      delete
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
