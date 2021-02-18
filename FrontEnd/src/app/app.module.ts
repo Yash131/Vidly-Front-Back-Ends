@@ -39,6 +39,7 @@ import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from "ng-recaptcha";
 // import { NgxWhastappButtonModule } from "ngx-whatsapp-button";
 import { CookieService } from 'ngx-cookie-service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MovieListingComponent,
     SignUpComponent,
     SignInSignUpComponent,
+    HeadNavbarComponent,
   ],
   imports: [
     BrowserModule,
