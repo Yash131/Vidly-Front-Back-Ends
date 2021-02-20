@@ -40,6 +40,8 @@ import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from "ng-recaptcha";
 import { CookieService } from 'ngx-cookie-service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
     SignUpComponent,
     SignInSignUpComponent,
     HeadNavbarComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
     MatCardModule,
     MatButtonModule,
     RecaptchaV3Module,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule,
     // NgxWhastappButtonModule
   ],
   providers: [

@@ -1,93 +1,67 @@
-<!-- <div class="container">
-  <div class="card-group">
-    <div class="card text-center col-12 col-sm-12 col-md-6 col-lg-6" *ngFor="let movie of movies" id="card">
-      <img class="card-img-top" [src]="movie.imageUrl" alt="" />
-
-      <span class="badge badge-info" style="border-radius: 0; font-weight: 500"
-        >Stock : {{ movie.numberInStock }}</span
-      >
-
-      <div class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
-
-        <div class="card-subtitle mb-2 text-muted">
-          <span> <b>Genre</b> : {{ movie.genre.name }} </span>,
-          <span><b>Rating</b> : {{ movie.rating }}/5</span>
-        </div>
-
-        <div class="card-text">
-          <span class="btn btn-transparent">
-            <b>Rental Rate</b> : {{ movie.dailyRentalRate | currency }}
-          </span>
-          <span class="btn btn-transparent">
-            <b>Price</b> : {{ movie.price | currency }}</span
-          >
-        </div>
-
-        <div>
-          <p class="card-text"><b>Summery</b> : {{ movie.summery }}</p>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div>
-          <a
-            (click)="trailerPopUp(movie.trailerUrl)"
-            class="btn btn-block btn-dark"
-          >
-            <i class="fa fa-youtube"></i> Watch Trailer</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <genres class="mt-3"></genres>
-<div class="container mt-5">
-  <div class="card  mb-5" *ngFor="let movie of movies">
+<div class="container mt-5 mb-5">
+  <div class="card mb-5 box_shadow" *ngFor="let movie of movies">
     <div class="row">
       <div class="col-12 col-sm-12 col-md-3 col-lg-3">
         <img [src]="movie.imageUrl" alt="" />
       </div>
       <div class="col-12 col-sm-12 col-lg-9 col-md-9">
         <div class="card-body">
-          <h2 class="card-title">{{ movie.title }}</h2>
-          <h3 class="card-title text-muted">
+          <h4 class="card-title d-inline-block">{{ movie.title }}</h4>
+          <span class="badge badge-info p-2 stock_badge"
+            >Stock : {{ movie.numberInStock }}</span
+          >
+          <h5 class="card-title text-muted mb-4">
             Genre :
             <span class="text-muted">{{ movie.genre.name }}</span>
-          </h3>
-          <p class="card-text">{{ movie.summery }}</p>
+          </h5>
+          <p class="card-text"><b>Summery</b> :{{ movie.summery }}</p>
           <div>
-            <span class="mr-3">
+            <!-- <span class="mr-3">
               <b>Rental Rate</b> : {{ movie.dailyRentalRate | currency }}
-            </span>
+            </span> -->
             <span class="mr-3">
               <b>Price</b> : {{ movie.price | currency }}</span
             >
-            <span
-              class="badge badge-info"
-              style="border-radius: 0; font-weight: 500"
-              >Stock : {{ movie.numberInStock }}</span
-            >
-            <div>
-              <div class="mt-1">
-                <button
-                  (click)="trailerPopUp(movie.trailerUrl)"
-                  class="btn btn-dark"
-                >
-                  <i class="fa fa-youtube"></i> Watch Trailer</button
-                >
-              </div>
 
-              <div class="mt-3">
-                <span>
-                  <button class="btn btn-dark mr-2">Rent</button>
-                </span>
-                <span>
-                  <button class="btn btn-dark mr-2">Buy</button>
-                </span>
-                <span>
-                  <button class="btn btn-dark">Add to Cart</button>
-                </span>
+            <div>
+              <div class="mt-2">
+                <span class="mr-3 v-align-super"><b>Rating</b> :</span>
+                <ngb-rating [max]="5" [rate]="movie.rating" readonly="true">
+                  <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill"
+                        ><em class="fa fa-star text-warning"></em></span
+                      ><em class="fa fa-star-o text-warning cursor"></em>
+                    </span>
+                  </ng-template>
+                </ngb-rating>
+              </div>
+              <div class="mt-4 row">
+                <div class="col-12 col-md-4 mb-3" *ngIf="!movie?.inCart">
+                  <button class="btn btn-danger w-100" (click)="removeFromCart(movie)">
+                    <i class="fa fa-minus-square px-1" aria-hidden="true"></i
+                    >Remove From Cart
+                  </button>
+                </div>
+                <div class="col-12 col-md-4 mb-3" *ngIf="!movie?.inCart">
+                  <button
+                    class="btn btn-success w-100"
+                    (click)="addToCart(movie)"
+                  >
+                    <i class="fa fa-cart-plus px-1" aria-hidden="true"></i>Add
+                    To Cart
+                  </button>
+                </div>
+
+                <div class="col-12 col-md-4 mb-3">
+                  <button
+                    (click)="trailerPopUp(movie.trailerUrl)"
+                    class="btn btn-dark w-100"
+                  >
+                    <i class="fa fa-youtube px-1"></i> Watch Trailer
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -96,3 +70,4 @@
     </div>
   </div>
 </div>
+

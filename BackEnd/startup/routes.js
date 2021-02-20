@@ -9,6 +9,8 @@ const users = require("../routes/users_API");
 const auth = require("../routes/auth(login)_API");
 const contactUs = require("../routes/contactUs_API");
 const schoppingCarts = require("../routes/shoppingCarts_API");
+const userCart = require("../routes/user-cart_API");
+
 
 const error = require("../middlewares/error");
 const winston = require("winston");
@@ -35,6 +37,7 @@ module.exports = function (app) {
   app.use("/api/auth", auth);
   app.use("/api/contactUs", contactUs);
   app.use("/api/carts", schoppingCarts);
+  app.use("/api/userCart", userCart);
 
   app.use(error); /*Always put in the end of middleware list*/
 };

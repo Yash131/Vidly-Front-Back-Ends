@@ -1,0 +1,7 @@
+.tableShadow{
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: -1rem 0 3rem #717171;
+  overflow: hidden;
+  border: none !important ;
+}

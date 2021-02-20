@@ -11,4 +11,5 @@ export class Movies {
   price: number;
   numberInStock: number;
   dailyRentalRate: number;
+  inCart:boolean
 }

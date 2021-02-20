@@ -15,12 +15,14 @@ import { AuthGuard } from "./auth/auth.guard";
 import { AdminAuthGuard } from "./auth/admin-auth.guard";
 import { SignUpComponent } from "./sign-in-sign-up/sign-up/sign-up.component";
 import { SignInSignUpComponent } from "./sign-in-sign-up/sign-in-sign-up.component";
+import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "movies", component: MoviesComponent },
   { path: "aboutUs", component: AboutUsComponent },
   { path: "contactUs", component: ContactUsComponent },
+  { path: "cart", component: ShoppingCartComponent },
   {
     path: "user",
     component: SignInSignUpComponent,

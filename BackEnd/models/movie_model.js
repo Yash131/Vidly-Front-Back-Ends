@@ -48,6 +48,10 @@ const Movie = mongoose.model(
       min: 0,
       max: 255,
     },
+    inCart : {
+      type : Boolean,
+      default : false
+    }
   })
 );
 

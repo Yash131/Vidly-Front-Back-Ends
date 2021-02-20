@@ -105,10 +105,6 @@ nav span a {
   filter: drop-shadow(2px 4px 6px black);
 }
 
-.nav-item{
-  color: white !important;
-}
-
 .navContainer{
   box-shadow:
   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -133,4 +129,49 @@ nav span a {
 
 .socialIcons a:hover{
   // padding: 10px;
+}
+.nav-link {
+  color: white !important;
+}
+
+.navbar .active {
+  color: #fc85ae !important;
+}
+
+.fa-stack[data-count]:after{
+  position:absolute;
+  right: -20%;
+  top: -24%;
+  content: attr(data-count);
+  font-size:60%;
+  padding:.4em;
+  border-radius:999px;
+  line-height:.75em;
+  color: black;
+  color:#fc85ae;
+  text-align:center;
+  min-width:1em;
+  font-weight:bold;
+  background: black;
+  border-style:solid;
+}
+.fa-circle {
+  color:#fc85ae;
+}
+
+.red-cart {
+	color: #DF0000; background:white;
+}
+
+.navDropDownMenu{
+  filter: brightness(8) !important;
+  border: 1px solid white !important;
+  background-color: black !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  color: #a79f9f !important;
+  filter: brightness(0.2) !important;
+  text-decoration: none !important;
+  background-color: transparent !important;
 }

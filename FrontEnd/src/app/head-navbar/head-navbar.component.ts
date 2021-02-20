@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart.service';
 import { JwtService } from '../services/jwt.service';
 
 @Component({
@@ -10,24 +12,32 @@ import { JwtService } from '../services/jwt.service';
   templateUrl: './head-navbar.component.html',
   styleUrls: ['./head-navbar.component.scss']
 })
-export class HeadNavbarComponent implements OnInit {
+export class HeadNavbarComponent implements OnInit , OnDestroy{
   user: User;
   iswebApp: boolean = true;
   isMobileApp: boolean = false;
   isTablet: boolean = false;
+  totalItemInCart:any;
+  subscriptions: Subscription;
   constructor(
     private authService: AuthService,
     private jwtService: JwtService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cartService : CartService
   ) {}
 
   ngOnInit() {
     this.getScreenSize();
     this.getCurrentUserData()
-
-    // let isLoggedIn = this.authService.isLoggedIn();
-    // console.log(isLoggedIn);
+    let isLoggedIn = this.authService.isLoggedIn();
+    if(isLoggedIn){
+      this.getTotalItem();
+    }
+    this.subscriptions = this.cartService.cartSource$.subscribe( (res) => {
+      // console.log(res)
+      this.totalItemInCart = res?.products?.length
+    } )
   }
 
   getScreenSize() {
@@ -81,4 +91,15 @@ export class HeadNavbarComponent implements OnInit {
     );
   }
 
+  getTotalItem(){
+    this.cartService.totalItemInCart().subscribe((res:any)=>{
+      this.totalItemInCart = res.totalItems;
+    },(err)=>{
+      console.log(err)
+    })
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe();
+  }
 }
