@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigateByUrl("/signIn");
+      this.router.navigate(['user/signIn']);
       this.jwtService.destroyToken();
       return false;
     }

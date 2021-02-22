@@ -10,8 +10,8 @@ export class MoviesService {
   private BASE_URL: string = "http://localhost:3000/api/";
   constructor(private httpClient: HttpClient) {}
 
-  getMovies(): Observable<Movies[]> {
-    return this.httpClient.get<Movies[]>(`${this.BASE_URL}movies`);
+  getMovies(genre): Observable<Movies[]> {
+    return this.httpClient.get<Movies[]>(`${this.BASE_URL}movies/genre/${genre}`);
   }
 
   postMovie(body: Movies): Observable<Movies> {
@@ -28,5 +28,5 @@ export class MoviesService {
 
   deleteMovie(id: string): Observable<Movies> {
     return this.httpClient.delete<Movies>(`${this.BASE_URL}movies/${id}`);
-  }  
+  }
 }

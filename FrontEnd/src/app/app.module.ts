@@ -42,6 +42,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginOrLogoutAlertModalComponent } from './popups/login-or-logout-alert-modal/login-or-logout-alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SignInSignUpComponent,
     HeadNavbarComponent,
     ShoppingCartComponent,
+    LoginOrLogoutAlertModalComponent,
   ],
   imports: [
     BrowserModule,

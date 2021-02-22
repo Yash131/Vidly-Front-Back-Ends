@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Genres } from "../models/genres";
 import { JwtService } from "./jwt.service";
 
@@ -9,6 +9,9 @@ import { JwtService } from "./jwt.service";
 })
 export class GenresService {
   BASE_URL: string = "http://localhost:3000/api/";
+
+  private _genreSource = new Subject<any>();
+  genreSource$ = this._genreSource.asObservable();
 
   constructor(private httpClient: HttpClient, private jwtService: JwtService) {}
 
@@ -31,6 +34,11 @@ export class GenresService {
   getGenreByID(id: string): Observable<Genres> {
     return this.httpClient.get<Genres>(`${this.BASE_URL}genres/${id}`);
   }
+
+  sendGenreData(data){
+    this._genreSource.next(data)
+  }
+
 }
 // {
 //   headers: new HttpHeaders().set("Authorization", this.jwtService.),

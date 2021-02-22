@@ -42,7 +42,7 @@ router.post("/", [auth, admin], async (req, res) => {
   res.send(movie);
 });
 
-router.put("/:id", [auth, admin, validateObjId], async (req, res, next) => {
+router.put("/admin/:id", [auth, admin, validateObjId], async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -78,7 +78,7 @@ router.put("/:id", [auth, admin, validateObjId], async (req, res, next) => {
   res.send(movie);
 });
 
-router.delete("/:id", [auth, admin, validateObjId], async (req, res) => {
+router.delete("/admin/:id", [auth, admin, validateObjId], async (req, res) => {
   const movie = await Movie.findByIdAndRemove(req.params.id);
   if (!movie) {
     return res.status(404).send("The movie with the given ID was not found.");
@@ -86,12 +86,43 @@ router.delete("/:id", [auth, admin, validateObjId], async (req, res) => {
   res.send(movie);
 });
 
-router.get("/:id", [auth, admin, validateObjId], async (req, res) => {
+router.get("/admin/:id", [auth, admin, validateObjId], async (req, res) => {
   const movie = await Movie.findById(req.params.id);
   if (!movie) {
     return res.status(404).send("The movie with the given ID was not found.");
   }
   res.send(movie);
+});
+
+router.get("/genre/:id?", async (req, res, next) => {
+
+  let genreID = req.params.id;
+  if(!genreID){
+    console.log('none')
+    const movies = await Movie.find().sort("name");
+    return res.send(movies)
+  }else{
+    if(genreID == "any" || genreID == "null" || genreID == "undefined" || genreID == "[object Object]"){
+      const movies = await Movie.find().sort("name");
+      return res.send(movies)
+    }else if(genreID != "any"){
+      let genre = await Genre.findById(genreID);
+      console.log(genre)
+      if(genre){
+        const movieByGenre = await Movie.find({ 'genre._id': genreID })
+        return res.send(movieByGenre)
+      }else{
+        return res.send(404).send("Incorrect Genre ID")
+      }
+    }
+  }
+
+
+  // else if(!genreID){
+  //   const movies = await Movie.find().sort("name");
+  //   return res.send(movies)
+  // }
+
 });
 
 module.exports = router;

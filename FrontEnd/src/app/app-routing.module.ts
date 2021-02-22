@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: "movies", component: MoviesComponent },
   { path: "aboutUs", component: AboutUsComponent },
   { path: "contactUs", component: ContactUsComponent },
-  { path: "cart", component: ShoppingCartComponent },
+  { path: "cart", component: ShoppingCartComponent , canActivate : [AuthGuard]},
   {
     path: "user",
     component: SignInSignUpComponent,

@@ -1,43 +1,45 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { Subscription } from 'rxjs';
-import { User } from '../models/user';
-import { AuthService } from '../services/auth.service';
-import { CartService } from '../services/cart.service';
-import { JwtService } from '../services/jwt.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { Subscription } from "rxjs";
+import { User } from "../models/user";
+import { AuthService } from "../services/auth.service";
+import { CartService } from "../services/cart.service";
+import { JwtService } from "../services/jwt.service";
+declare var $: any;
 
 @Component({
-  selector: 'head-navbar',
-  templateUrl: './head-navbar.component.html',
-  styleUrls: ['./head-navbar.component.scss']
+  selector: "head-navbar",
+  templateUrl: "./head-navbar.component.html",
+  styleUrls: ["./head-navbar.component.scss"],
 })
-export class HeadNavbarComponent implements OnInit , OnDestroy{
+export class HeadNavbarComponent implements OnInit, OnDestroy {
   user: User;
   iswebApp: boolean = true;
   isMobileApp: boolean = false;
   isTablet: boolean = false;
-  totalItemInCart:any;
+  totalItemInCart: any;
   subscriptions: Subscription;
+  isLoggedIn;
   constructor(
     private authService: AuthService,
     private jwtService: JwtService,
     private router: Router,
     private cookieService: CookieService,
-    private cartService : CartService
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
     this.getScreenSize();
-    this.getCurrentUserData()
-    let isLoggedIn = this.authService.isLoggedIn();
-    if(isLoggedIn){
+    this.getCurrentUserData();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if (this.isLoggedIn) {
       this.getTotalItem();
     }
-    this.subscriptions = this.cartService.cartSource$.subscribe( (res) => {
+    this.subscriptions = this.cartService.cartSource$.subscribe((res) => {
       // console.log(res)
-      this.totalItemInCart = res?.products?.length
-    } )
+      this.totalItemInCart = res?.products?.length;
+    });
   }
 
   getScreenSize() {
@@ -61,14 +63,21 @@ export class HeadNavbarComponent implements OnInit , OnDestroy{
   }
 
   logout() {
-    this.jwtService.destroyToken();
-    this.router.navigateByUrl("");
-    location.pathname = "/user/signIn";
-    this.cookieService.deleteAll("/", "localhost");
+
+    if (this.isLoggedIn) {
+      let data = {
+        action: "logout",
+        modalTitle: "Are you sure you want to logout?",
+        text:
+          `If you will logout you want be able to access the shopping cart or adding movies in the cart.`,
+      };
+      this.authService.sendLoginLogoutModalData(data);
+      $("#loginLogoutModal").modal("show");
+    }
+
   }
 
-  getCurrentUserData(){
-
+  getCurrentUserData() {
     this.authService.getCurrentUser().subscribe(
       (data) => {
         this.user = data;
@@ -82,8 +91,6 @@ export class HeadNavbarComponent implements OnInit , OnDestroy{
           // expires : now.setTime(now.getTime() + (min*60*1000))
         });
         // let cookie = this.cookieService.get('userInfo')
-        // console.log(cookie)
-        console.log(this.cookieService.check("userInfo"));
       },
       (err) => {
         console.error(err.error);
@@ -91,15 +98,34 @@ export class HeadNavbarComponent implements OnInit , OnDestroy{
     );
   }
 
-  getTotalItem(){
-    this.cartService.totalItemInCart().subscribe((res:any)=>{
-      this.totalItemInCart = res.totalItems;
-    },(err)=>{
-      console.log(err)
-    })
+  getTotalItem() {
+    this.cartService.totalItemInCart().subscribe(
+      (res: any) => {
+        this.totalItemInCart = res.totalItems;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  ngOnDestroy(){
+  goToCart() {
+    if (!this.isLoggedIn) {
+      let data = {
+        action: "login",
+        modalTitle: "Login First!",
+        text:
+          `In order to access the shopping cart or adding movies in the cart you have to login first.`,
+      };
+      this.authService.sendLoginLogoutModalData(data);
+      $("#loginLogoutModal").modal("show");
+    }else{
+      this.router.navigate(["cart"])
+    }
+
+  }
+
+  ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 }

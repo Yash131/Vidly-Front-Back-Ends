@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { LoginResponse, User } from "../models/user";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 import { JwtService } from "./jwt.service";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +14,15 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthService {
   helper = new JwtHelperService();
 
-  constructor(private httpClient: HttpClient, private jwtService: JwtService) {}
+  private _loginLogoutModalData = new Subject<any>();
+  loginLogoutModalData$ = this._loginLogoutModalData.asObservable();
+
+  constructor(
+    private httpClient: HttpClient,
+    private jwtService: JwtService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   login(body: User): Observable<LoginResponse> {
     return this.httpClient.post<LoginResponse>(
@@ -44,4 +54,14 @@ export class AuthService {
     }
   }
 
+  sendLoginLogoutModalData(data) {
+    this._loginLogoutModalData.next(data);
+  }
+
+  loggingOutUser() {
+    this.jwtService.destroyToken();
+    this.router.navigateByUrl("");
+    location.pathname = "/user/signIn";
+    this.cookieService.deleteAll("/", "localhost");
+  }
 }

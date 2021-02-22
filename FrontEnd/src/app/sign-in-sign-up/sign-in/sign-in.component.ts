@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
             // console.log("login Works");
             this.jwtService.setToken(data.jwtToken);
             this.router.navigate([""]);
-            (location.pathname = ""),
+            (location.pathname = "");
             this._snackBar.open(`Hi, How You're Doing?`, "Success", {
               duration: 3000,
             });
