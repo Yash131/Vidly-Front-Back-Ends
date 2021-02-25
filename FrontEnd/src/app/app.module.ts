@@ -43,6 +43,13 @@ import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginOrLogoutAlertModalComponent } from './popups/login-or-logout-alert-modal/login-or-logout-alert-modal.component';
+import { OrderComponent } from './order/order.component';
+import { OrderCheckOutComponent } from './order-check-out/order-check-out.component';
+import { PayPalCheckoutComponent } from './pay-pal-checkout/pay-pal-checkout.component';
+import { OrderSuccessPageComponent } from './order-success-page/order-success-page.component';
+import { LoaderComponent } from './loader/loader.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,13 @@ import { LoginOrLogoutAlertModalComponent } from './popups/login-or-logout-alert
     HeadNavbarComponent,
     ShoppingCartComponent,
     LoginOrLogoutAlertModalComponent,
+    OrderComponent,
+    OrderCheckOutComponent,
+    PayPalCheckoutComponent,
+    OrderSuccessPageComponent,
+    LoaderComponent,
+    MyProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -82,6 +96,7 @@ import { LoginOrLogoutAlertModalComponent } from './popups/login-or-logout-alert
     RecaptchaV3Module,
     NgSelectModule,
     NgbModule,
+    MatExpansionModule
     // NgxWhastappButtonModule
   ],
   providers: [

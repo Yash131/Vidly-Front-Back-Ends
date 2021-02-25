@@ -1,0 +1,145 @@
+<app-loader *ngIf="isLoadig"></app-loader>
+<div class="jumbotron">
+  <blockquote class="blockquote text-dark text-center align-items-center">
+    <h1 class="display-4">My Orders</h1>
+    <footer class="blockquote-footer">
+      All your order's and their details are present here
+      <i class="fa fa-heart" aria-hidden="true"></i>.
+    </footer>
+  </blockquote>
+</div>
+
+<div class="container orderContainer" style="overflow: hidden;">
+  <ng-container *ngFor="let order of myOrders">
+    <mat-accordion>
+      <mat-expansion-panel
+        class="mb-3"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+
+          <mat-panel-description>
+            <b>Placed On :</b>
+            <span class="px-1">{{ order?.createdAt | date: "MMMM d, y, h:mm:ss a" }}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-12 col-md-6 mt-3  ">
+            <ul class="list-group list-group-flush box_shadow" >
+              <li *ngFor="let item of order?.products" class="list-group-item">
+
+                <div class="float-left">
+                  <span class="px-1"> <img class="productImg"  [src]="item?.image" alt=""> </span>
+                  <span class="px-1">{{ item?.title }}</span>
+                </div>
+                <div class="float-right">
+                  {{ item?.price | currency: "USD":true }}
+                </div>
+              </li>
+              <li class="list-group-item font-weight-bold align-middle">
+                Total
+                <div class="float-right align-middle">
+                  {{ order?.totalPrice | currency: "USD":true }}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6 mt-3">
+
+            <ul class="list-group list-group-flush box_shadow">
+
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-12 px-2">
+                    <span class="">
+                      <b>Order ID : </b><span class="px-1">{{order?._id}} </span>
+                    </span>
+                  </div>
+                  <div class="col-12 px-2">
+                    <span class="">
+                      <b>Payment RefID : </b><span class="px-1">{{order?.paymentModeData?.id}}</span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+
+                <div class="row">
+                  <div class="col-12 px-2">
+                    <span class="">
+                      <b>Mobile : </b><span class="px-1">{{order?.shippingDetails.mobile}} </span>
+                    </span>
+                  </div>
+                  <div class="col-12 px-2">
+                    <span class="">
+                      <b>Email : </b><span class="px-1">{{order?.shippingDetails.email}}</span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-12 col-md-6 px-2">
+                    <span class="">
+                      <b>Order Status : </b><span class="px-1">{{order?.orderStatus}} </span>
+                    </span>
+                  </div>
+                  <div class="col-12 col-md-6 px-2">
+                    <span class="">
+                      <b>Payment Mode : </b><span class="px-1">{{order?.paymentMode}}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </li>
+
+
+
+              <li class="list-group-item">
+
+                <div class="">
+                  <b>Shipping Details : </b>
+                </div>
+                <div class="mt-1">
+                  <small>
+                    <b>
+                      {{order?.shippingDetails.name}}
+                      {{order?.shippingDetails.addressLine1}}
+                      {{order?.shippingDetails.addressLine2}}
+                    </b>
+                  </small>
+                </div>
+
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!-- <div class="card" style="width: 800px">
+      <div class="row no-gutters">
+        <div class="col-sm-5">
+          <img
+            class="card-img"
+            src="/images/defaultimg.png"
+            alt="Suresh Dasari Card"
+          />
+        </div>
+        <div class="col-sm-7">
+          <div class="card-body">
+            <h5 class="card-title">Suresh Dasari</h5>
+            <p class="card-text">
+              Suresh Dasari is a founder and technical lead developer in
+              tutlane.
+            </p>
+            <a href="#" class="btn btn-primary">View Profile</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </ng-container>
+</div>

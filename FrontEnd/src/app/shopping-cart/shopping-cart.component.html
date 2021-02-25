@@ -20,7 +20,7 @@
       <table class=" table table-hover " *ngIf="movieArr?.length">
           <thead class="thead-dark">
               <tr>
-                  <th></th>
+                  <th>Image</th>
                   <th>Movies</th>
                   <th class="text-center">Quantity</th>
                   <th class="text-right" >Price</th>
@@ -31,16 +31,16 @@
           <tbody>
               <tr  *ngFor="let movie of movieArr">
 
-                  <td></td>
-                  <td>{{movie.title}}</td>
-                  <td class="text-center">
+                  <td><img class="productImg" [src]="movie?.image" alt=""></td>
+                  <td class="align-middle">{{movie.title}}</td>
+                  <td class="text-center align-middle">
                       <!-- <product-quantity  [product]='item' [shopping-cart]='cart'></product-quantity> -->
                       1
                   </td>
-                  <td class="text-right">
+                  <td class="text-right align-middle">
                       {{movie.price | currency:'USD':true}}
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <button class="btn btn-danger" (click)="remMovie(movie)" style="float: right;">
                       <i class="fa fa-trash-o text-right" aria-hidden="true" ></i>
                     </button>
@@ -51,13 +51,13 @@
           <tfoot >
               <tr>
                 <th> </th>
-                <th>
+                <th class="align-middle">
                   <button type="button" class="btn btn-danger btn-sm " (click)="clearCart()">
                          <i class="fa fa-trash-o" aria-hidden="true" style="margin-right: 5px;"></i>Clear Cart
                   </button>
                 </th>
-                <th class="text-center">Total Price : </th>
-                <th class="text-right">{{ cart?.totalPrice | currency:'USD':true }}</th>
+                <th class="text-center align-middle">Total Price : </th>
+                <th class="text-right align-middle">{{ cart?.totalPrice | currency:'USD':true }}</th>
                 <th></th>
               </tr>
             </tfoot>
@@ -68,7 +68,7 @@
     </div>
     <div class="container-fluid text-right mt-5" style="margin-bottom: 25px;">
 
-      <button  class="btn btn-primary btn-md"  [disabled]="!movieArr?.length">
+      <button  class="btn btn-primary btn-md"  [disabled]="!movieArr?.length" (click)="proceedToPlaceOrder()">
           <i class="fa fa-money" aria-hidden="true" style="margin-right: 5px;"></i>
           Proceed
       </button>

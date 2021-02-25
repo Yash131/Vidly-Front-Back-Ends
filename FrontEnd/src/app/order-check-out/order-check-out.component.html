@@ -1,0 +1,142 @@
+<div class="jumbotron text-center mb-5">
+  <h1 class="display-5" *ngIf="enableShipping">
+    <strong>Shipping Details</strong>
+  </h1>
+  <h1 class="display-5" *ngIf="enableCheckout"><strong>Check Out</strong></h1>
+</div>
+
+<div class="container" *ngIf="enableShipping">
+  <div class="row mb-5 mt-4">
+    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <form
+        [formGroup]="shippingForm"
+        class="box_shadow p-5"
+        style="border-radius: 6px"
+      >
+        <div class="form-group">
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            formControlName="name"
+            placeholder="name"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            name="name"
+            class="form-control"
+            formControlName="email"
+            placeholder="email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            name="mobile"
+            class="form-control"
+            formControlName="mobile"
+            placeholder="mobile number"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="addressLine1"
+            class="form-control"
+            formControlName="addressLine1"
+            placeholder="Address Line1"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            name="addressLine2"
+            class="form-control"
+            formControlName="addressLine2"
+            placeholder="Address Line 2"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="city"
+            class="form-control"
+            formControlName="city"
+            placeholder="city"
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <button
+                [disabled]="!shippingForm.valid"
+                type="submit"
+                class="btn btn-success w-100"
+                (click)="submitForm()"
+              >
+                Save details
+              </button>
+            </div>
+            <div class="col-6">
+              <button
+                [disabled]="!shippingForm.valid"
+                type="submit"
+                class="btn btn-warning w-100"
+                (click)="resetBtn()"
+              >
+                Reset Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+  </div>
+</div>
+
+<div class="container" *ngIf="enableCheckout">
+  <div class="row mb-5 mt-4">
+    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="text-center">
+        <div class="card box_shadow">
+          <div class="card-body">
+            <h4 class="card-title">Order Summary</h4>
+            <p class="card-text">
+              You have {{ cart?.products?.length }} items in your shopping cart.
+            </p>
+            <ul class="list-group list-group-flush">
+              <li *ngFor="let item of cart?.products" class="list-group-item">
+                <!-- {{ item?.quantity }} x  -->
+                {{ item?.title }}
+                <div class="float-right">
+                  {{ item?.price | currency: "USD":true }}
+                </div>
+              </li>
+              <li class="list-group-item font-weight-bold">
+                Total
+                <div class="float-right">
+                  {{ cart?.totalPrice | currency: "USD":true }}
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <app-pay-pal-checkout
+              [cartDetails]="cartDetails"
+              [shippingDetails]="shippingDetails"
+              [userDetails]="userDetails"
+            ></app-pay-pal-checkout>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+  </div>
+</div>

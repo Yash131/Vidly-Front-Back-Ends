@@ -19,14 +19,14 @@ export class MoviesService {
   }
 
   getAMovie(id: string): Observable<Movies> {
-    return this.httpClient.get<Movies>(`${this.BASE_URL}movies/${id}`);
+    return this.httpClient.get<Movies>(`${this.BASE_URL}movies/admin/${id}`);
   }
 
   updateMovie(id: string, body: Movies): Observable<Movies> {
-    return this.httpClient.put<Movies>(`${this.BASE_URL}movies/${id}`, body);
+    return this.httpClient.put<Movies>(`${this.BASE_URL}movies/admin/${id}`, body);
   }
 
   deleteMovie(id: string): Observable<Movies> {
-    return this.httpClient.delete<Movies>(`${this.BASE_URL}movies/${id}`);
+    return this.httpClient.delete<Movies>(`${this.BASE_URL}movies/admin/${id}`);
   }
 }

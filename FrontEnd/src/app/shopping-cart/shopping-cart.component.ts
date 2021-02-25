@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CartService } from '../services/cart.service';
 export class ShoppingCartComponent implements OnInit {
   movieArr : any[] = [];
   cart: any;
-  constructor(private cartService : CartService) { }
+  constructor(private cartService : CartService, private router : Router) { }
 
   ngOnInit(): void {
     this.getCart();
@@ -30,6 +31,7 @@ export class ShoppingCartComponent implements OnInit {
     try {
       this.cartService.emptyWholeCart().subscribe( (res:any)=>{
         this.cartService.sendCartData(res.data)
+        this.cart = res.data;
         this.getCart();
       },(err)=>{
         console.log(err);
@@ -44,10 +46,17 @@ export class ShoppingCartComponent implements OnInit {
     // console.log(movie)
     this.cartService.removeAmovieFromCart(movie._id).subscribe( (res:any) =>{
       // console.log(res)
+      this.cart = res.data;
       this.cartService.sendCartData(res.data)
       this.getCart();
     }, (err)=>{
       console.log(err)
     } )
   }
+
+  proceedToPlaceOrder(){
+    // this.cartService.sendCartData(this.cart)
+    this.router.navigate(['check-out'])
+  }
+
 }

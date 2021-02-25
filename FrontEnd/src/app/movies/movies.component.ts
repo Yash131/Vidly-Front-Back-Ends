@@ -66,6 +66,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log(movie);
       let obj = {
         movieID: movie._id,
+        image : movie.imageUrl,
         quantity: 1,
         title: movie.title,
         price: movie.price,

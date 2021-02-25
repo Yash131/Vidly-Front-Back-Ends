@@ -164,7 +164,8 @@
             }}<i class="fa fa-user-circle fa-lg px-1" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu navDropDownMenu">
-            <a id="dropDownLink" class="dropdown-item">My Orders</a>
+            <a id="dropDownLink" class="dropdown-item" [routerLink]="['my-profile']" routerLinkActive="router-link-active" >My Profile</a>
+            <a id="dropDownLink" class="dropdown-item" [routerLink]="['my-orders']" routerLinkActive="router-link-active" >My Orders</a>
             <div class="dropdown-divider bg"></div>
             <a
               routerLink=""

@@ -50,6 +50,7 @@ const CartSchema = new mongoose.Schema(
     products: [
       {
         movieID: { type : mongoose.Schema.Types.ObjectId },
+        image : String,
         quantity: Number,
         title: String,
         price: Number      

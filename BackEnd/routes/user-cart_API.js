@@ -7,7 +7,7 @@ const auth = require("../middlewares/auth");
 const { Movie } = require("../models/movie_model");
 
 router.post("/", auth, async (req, res) => {
-  const { movieID, quantity, title, price } = req.body;
+  const { movieID, quantity, title, price , image} = req.body;
 
   try {
     // console.log(req.user)
@@ -46,7 +46,7 @@ router.post("/", auth, async (req, res) => {
       } else {
         console.log("product does not exists in cart, add new item");
         //product does not exists in cart, add new item
-        cart.products.push({ movieID, quantity, title, price });
+        cart.products.push({ movieID, quantity, title, price , image});
         cart.totalPrice += parseInt(price * quantity);
       }
       // console.log(cart);
@@ -65,7 +65,7 @@ router.post("/", auth, async (req, res) => {
       //no cart for user, create new cart
       const newCart = await CartNew.create({
         userId,
-        products: [{ movieID, quantity, title, price }],
+        products: [{ movieID, quantity, title, price, image}],
         totalPrice: parseInt(price * quantity),
       });
       try {

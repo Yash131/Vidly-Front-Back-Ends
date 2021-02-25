@@ -3182,3 +3182,66 @@
 {"level":"info","message":"Morgan is running...","timestamp":"2021-02-22T08:19:06.367Z"}
 {"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-22T08:19:06.647Z"}
 {"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-22T08:19:06.698Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T07:34:05.371Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T07:34:11.194Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T07:34:21.237Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:03:41.244Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:03:41.666Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:03:41.737Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:12:16.775Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:12:17.040Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:12:17.080Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:12:35.063Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:12:35.314Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:12:35.353Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:27:36.531Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:27:36.799Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:27:36.899Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:35:04.818Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:35:05.113Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:35:05.163Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:38:27.691Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:38:28.002Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:38:28.048Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T12:41:12.573Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T12:41:12.884Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T12:41:12.930Z"}
+{"message":"Assignment to constant variable.","stack":"TypeError: Assignment to constant variable.\n    at D:\\Personal Data\\Projects\\Vidly-Front-Back-Ends\\BackEnd\\routes\\orders_API.js:26:9","level":"error","timestamp":"2021-02-23T12:42:23.554Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T13:02:54.935Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T13:02:55.328Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T13:02:55.407Z"}
+{"message":"Assignment to constant variable.","stack":"TypeError: Assignment to constant variable.\n    at D:\\Personal Data\\Projects\\Vidly-Front-Back-Ends\\BackEnd\\routes\\orders_API.js:26:9","level":"error","timestamp":"2021-02-23T13:03:48.669Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T13:04:27.455Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T13:04:27.887Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T13:04:27.948Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T13:12:03.212Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T13:12:03.538Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T13:12:03.604Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-23T13:16:57.754Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-23T13:16:58.378Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-23T13:16:58.467Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T07:15:53.878Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T07:15:54.274Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T07:15:54.399Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:09:29.003Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:09:33.827Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:09:33.917Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:47:44.218Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:47:44.722Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:47:44.784Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:48:40.784Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:48:41.671Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:48:41.896Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:51:17.474Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:51:17.824Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:51:17.885Z"}
+{"message":"userId is not defined","stack":"ReferenceError: userId is not defined\n    at D:\\Personal Data\\Projects\\Vidly-Front-Back-Ends\\BackEnd\\routes\\orders_API.js:42:54","level":"error","timestamp":"2021-02-24T08:51:21.885Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:52:02.919Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:52:03.274Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:52:03.331Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T08:58:25.928Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T08:58:26.649Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T08:58:26.790Z"}
+{"level":"info","message":"Morgan is running...","timestamp":"2021-02-24T09:34:21.270Z"}
+{"level":"info","message":"Node Server is Running on PORT: 3000...","timestamp":"2021-02-24T09:34:21.603Z"}
+{"level":"info","message":"Connected to mongodb://localhost/Vidly-Rentals...","timestamp":"2021-02-24T09:34:21.652Z"}
