@@ -9,7 +9,7 @@ const Movie = mongoose.model(
       type: String,
       required: true,
       trim: true,
-      minlength: 5,
+      minlength: 1,
       maxlength: 255,
     },
     genre: {

@@ -11,7 +11,7 @@ const contactUs = require("../routes/contactUs_API");
 const schoppingCarts = require("../routes/shoppingCarts_API");
 const userCart = require("../routes/user-cart_API");
 const orders = require("../routes/orders_API");
-
+const upcominMovie = require('../routes/upcomingMovies_API')
 
 const error = require("../middlewares/error");
 const winston = require("winston");
@@ -24,11 +24,15 @@ module.exports = function (app) {
     app.use(morgan("short"));
   }
 
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+  app.use( bodyParser.json({limit: '50mb'}) );
+  app.use(bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit:50000
+  }));
   app.use(require("cors")());
-  app.use(cookieParser())
-  app.use(require('prerender-node').set('prerenderToken', 'QqEtl0dUGE9Sjnu5GzKb'));
+  // app.use(cookieParser())
+  // app.use(require('prerender-node').set('prerenderToken', 'QqEtl0dUGE9Sjnu5GzKb'));
 
   app.use("/api/genres", genres);
   app.use("/api/customers", customers);
@@ -40,6 +44,7 @@ module.exports = function (app) {
   app.use("/api/carts", schoppingCarts);
   app.use("/api/userCart", userCart);
   app.use("/api/orders", orders);
+  app.use("/api/upcoming-movie", upcominMovie);
 
   app.use(error); /*Always put in the end of middleware list*/
 };

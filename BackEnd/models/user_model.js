@@ -6,23 +6,23 @@ const config = require("config");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     minlength: 5,
     maxlength: 255,
   },
   email: {
     type: String,
-    required: true,
     unique: true,
     maxlength: 255,
   },
   password: {
     type: String,
-    required: true,
   },
+  mobile : Number,
+  address : String,
+  photo : String,
   isAdmin: {
     type: Boolean,
-    default: null,
+    default: false,
   },
 });
 
@@ -42,9 +42,9 @@ const User = mongoose.model("Users", userSchema);
 
 const validate = (user) => {
   const schema = {
-    name: Joi.string().min(5).max(255).required(),
-    email: Joi.string().email().max(255).required(),
-    password: Joi.string().trim().required(),
+    name: Joi.string().min(5).max(255),
+    email: Joi.string().email().max(255),
+    password: Joi.string().trim(),
     isAdmin: Joi.boolean().default(false),
   };
 

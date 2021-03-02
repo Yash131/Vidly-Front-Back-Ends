@@ -7,7 +7,7 @@ import $ from 'jquery'
 @Component({
   selector: "app-contact-us",
   templateUrl: "./contact-us.component.html",
-  styleUrls: ["./contact-us.component.css"],
+  styleUrls: ["./contact-us.component.scss"],
 })
 export class ContactUsComponent implements OnInit {
   contactUsForm: FormGroup;
@@ -41,7 +41,7 @@ export class ContactUsComponent implements OnInit {
     this.contactUsService.postContacts(this.contactUsForm.value).subscribe(
       (data) => {
         console.log(data);
-        
+
         this._snackBar.open("Message Sent.", "Success", {
           duration: 3000,
         });
@@ -49,7 +49,7 @@ export class ContactUsComponent implements OnInit {
       },
       (err) => {
         console.error(err);
-        
+
         this._snackBar.open( `Error: ${err.error}`, "Failed", {
           duration: 3000,
         });

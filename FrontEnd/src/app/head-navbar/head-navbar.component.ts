@@ -6,6 +6,7 @@ import { User } from "../models/user";
 import { AuthService } from "../services/auth.service";
 import { CartService } from "../services/cart.service";
 import { JwtService } from "../services/jwt.service";
+import { UserService } from "../services/user.service";
 declare var $: any;
 
 @Component({
@@ -26,7 +27,8 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
     private jwtService: JwtService,
     private router: Router,
     private cookieService: CookieService,
-    private cartService: CartService
+    private cartService: CartService,
+    private userService : UserService
   ) {}
 
   ngOnInit() {
@@ -40,6 +42,8 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
       // console.log(res)
       this.totalItemInCart = res?.products?.length;
     });
+
+    this.subscriptions = this.userService.userInfoSource$.subscribe( (res) => {this.user = res} )
   }
 
   getScreenSize() {

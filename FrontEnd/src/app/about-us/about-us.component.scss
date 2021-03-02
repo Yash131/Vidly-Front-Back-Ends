@@ -1,0 +1,17 @@
+.containerAboutUs{
+  margin: 80px 50px;
+}
+
+.bgImage{
+  background-image: url(../../assets/img/pexels-cottonbro-6864670.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+}
+
+@media(max-width : 767px){
+  .containerAboutUs{
+    margin: 80px 5px !important;
+  }
+}

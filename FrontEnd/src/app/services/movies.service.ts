@@ -29,4 +29,8 @@ export class MoviesService {
   deleteMovie(id: string): Observable<Movies> {
     return this.httpClient.delete<Movies>(`${this.BASE_URL}movies/admin/${id}`);
   }
+
+  getUpcomingMovies(){
+    return this.httpClient.get(`${this.BASE_URL}upcoming-movie/get`);
+  }
 }

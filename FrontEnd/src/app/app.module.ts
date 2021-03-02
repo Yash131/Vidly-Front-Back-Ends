@@ -50,6 +50,8 @@ import { OrderSuccessPageComponent } from './order-success-page/order-success-pa
 import { LoaderComponent } from './loader/loader.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { FileUploadModule } from "ng2-file-upload";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     OrderSuccessPageComponent,
     LoaderComponent,
     MyProfileComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -96,7 +99,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     RecaptchaV3Module,
     NgSelectModule,
     NgbModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FileUploadModule
     // NgxWhastappButtonModule
   ],
   providers: [

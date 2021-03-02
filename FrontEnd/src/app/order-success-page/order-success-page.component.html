@@ -1,9 +1,12 @@
-<div class="container mt-5 mb-5">
-  <div class="box_shadow mt-5 p-5 bg-light">
-    <h2>
+<div class="container">
+  <div class="box_shadow bg-light br-6">
+    <h3 class="p-4 ">
       Order has been successfully placed. You can check all your orders in
       My-Orders Sections. Click here to go My-Orders Section
-      <button class="btn btn-success px-4 mr-2" [routerLink]="['my-orders']"> Orders </button>
-    </h2>
+
+    </h3>
+    <div class="text-center mb-3">
+      <a class="btn btn-outline-success w-50 m-4" (click)="navToOrders()">My Orders </a>
+    </div>
   </div>
 </div>

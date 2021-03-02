@@ -3,11 +3,11 @@ import $ from 'jquery'
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.css']
+  styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent implements OnInit {
 
-  constructor() { 
+  constructor() {
     $(window).ready(function () {
       $('input').attr('autocomplete', 'off');
     });

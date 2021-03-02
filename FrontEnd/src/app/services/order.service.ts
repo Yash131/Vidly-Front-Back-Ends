@@ -32,4 +32,9 @@ export class OrderService {
   getMyOrders(){
     return this.http.get(`${this.BASE_URL}orders/my-orders`)
   }
+
+  cancelOrder(data){
+    return this.http.post(`${this.BASE_URL}orders/cancel-order`, data)
+  }
+
 }

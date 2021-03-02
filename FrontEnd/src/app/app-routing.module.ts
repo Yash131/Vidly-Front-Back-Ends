@@ -81,6 +81,7 @@ const routes: Routes = [
     component: ControlMessagesComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
   },
+  { path : '**', component : HomeComponent }
 ];
 
 @NgModule({

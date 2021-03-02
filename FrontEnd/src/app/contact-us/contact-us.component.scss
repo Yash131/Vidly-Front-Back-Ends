@@ -1,0 +1,82 @@
+form button {
+  padding: 5px 25px 5px 25px;
+  border-radius: 20px;
+}
+
+.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+form {
+  margin-top: 30px;
+}
+form input {
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 0;
+}
+form input:focus {
+  border: none;
+  box-shadow: none;
+  border-bottom: 3px solid #fc85ae;
+  border-radius: 0;
+}
+
+form input::placeholder {
+  color: black;
+}
+
+form input:focus::placeholder {
+  color: #fc85ae;
+}
+
+textarea {
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 0;
+}
+textarea:focus {
+  border: none;
+  box-shadow: none;
+  border-bottom: 3px solid #fc85ae;
+  border-radius: 0;
+}
+form textarea:focus::placeholder {
+  color: #fc85ae;
+}
+textarea::placeholder {
+  color: black;
+}
+
+button {
+  background-color: #fc85ae;
+  color: white;
+  font-weight: 500px;
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: white;
+  color: #fc85ae;
+  border: 2px solid #fc85ae;
+}
+.card-header {
+  color: #fc85ae;
+}
+
+.containerAboutUs{
+  margin: 80px 50px;
+}
+
+.bgImage{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../../assets/img/contactUs.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+}
+
+@media(max-width : 767px){
+  .containerAboutUs{
+    margin: 80px 5px !important;
+  }
+}
