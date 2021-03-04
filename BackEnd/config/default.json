@@ -1,5 +1,7 @@
 {
- "jwtPrivateKey" : "",
+ "jwtPrivateKey" : "vidly_jwtSecretKey",
+ "signupAccKey":"activationKey",
+ "password": "pass",
  "db" : "mongodb://localhost/Vidly-Rentals",
- "pass": ""
+ "test":"test"
 }

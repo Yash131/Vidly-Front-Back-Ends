@@ -42,6 +42,15 @@
           readonly
           aria-autocomplete="none"
         />
+
+        <div class="p-1 d-initial">
+          <span class="float-right mt-2 mb-4">
+            <a (click)="router.navigate(['forgot-password'])" class="makeLink">
+             <small >Forgot Password?</small>
+            </a>
+          </span>
+        </div>
+
         <div
           style="margin-top: 10px"
           *ngIf="

@@ -15,7 +15,10 @@ export class UserService {
   constructor(private httpClient: HttpClient, private jwtService: JwtService) {}
 
   registerUser(body: RegUser) {
-    return this.httpClient.post<User>(`${environment.api_url}users`, body);
+    return this.httpClient.post<User>(
+      `${environment.api_url}users/signup`,
+      body
+    );
   }
 
   updatePassword(body) {
@@ -25,16 +28,11 @@ export class UserService {
     );
   }
 
-  // uploadProfilePic(file) {
-  //   const formData: FormData = new FormData();
-  //   formData.append("file", file);
-
-  //   console.log(file);
-  //   console.log(formData);
-
-  //   return this.httpClient.post( `${environment.api_url}users/profilePic`, formData)
-
-  // }
+  activateAcc(token) {
+    return this.httpClient.post(`${environment.api_url}users/activateAcc`, {
+      token: token,
+    });
+  }
 
   updateUserInfo(data) {
     return this.httpClient.post(
@@ -45,5 +43,19 @@ export class UserService {
 
   refreshUserInfo(data) {
     this._userInfoSource.next(data);
+  }
+
+  passResetRequest(email) {
+    return this.httpClient.post(
+      `${environment.api_url}users/pass_reset_request`,
+      { email: email }
+    );
+  }
+
+  passReset(data) {
+    return this.httpClient.post(
+      `${environment.api_url}users/reset_pass`,
+      data
+    );
   }
 }

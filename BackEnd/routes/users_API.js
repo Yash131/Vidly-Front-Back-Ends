@@ -4,28 +4,26 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const _ = require("lodash");
 const multer = require("multer");
-const cors = require('cors');
 
 const { User, validate } = require("../models/user_model");
+const {
+  mailTransporter,
+  sendMail,
+  mailConfig,
+} = require("../helperFunctions/mailService");
 const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 
-const MIME_TYPE_MAP = {
-  "image/png": "png",
-  "image/jpeg": "jpg",
-  "image/jpg": "jpg",
-};
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads')
+    cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
- 
-var upload = multer({ storage: storage })
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+
+var upload = multer({ storage: storage });
 
 // for getting all the users
 router.get("/", [auth, admin], async (req, res) => {
@@ -47,6 +45,7 @@ router.get("/current", async (req, res) => {
 
 // Registering/Creating a User
 router.post("/", async (req, res) => {
+  console.log(req.body);
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -146,5 +145,147 @@ router.post("/updateUserInfo", auth, async (req, res) => {
 //       return res.json({originalname:req.file.originalname, uploadname:req.file.filename});
 //   });
 // });
+
+router.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // validating body of request
+  const { error } = validate(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
+
+  // checking if user exists by email
+  user = await User.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(400).send("User Already Registered");
+  }
+
+  // generating jwttoken to send as activation link
+
+  const payload = {
+    name: name,
+    email: email,
+    password: password,
+  };
+  const token = jwt.sign(payload, config.get("signupAccKey"), {
+    expiresIn: "20m",
+  });
+
+  // activation mail sending
+
+  let obj = {
+    to: email,
+    subject: "Account Activation Email",
+    html: `
+    <h1>To activate your account follow bellow steps</h1>
+    <br>
+    <p>Link is only valid for 20 Minutes</p>
+    <p>First click on "click here" it will navigate you to our account activation page where you have to click on activate account button</p>
+    <a href = "${
+      "http://localhost:4200/account-activation?token=" + token
+    }" >Click Here</a>
+    `,
+  };
+  sendMail(mailConfig(obj), mailTransporter, res, req);
+});
+
+// Activating account with jwt token
+router.post("/activateAcc", async (req, res) => {
+  const { token } = req.body;
+
+  jwt.verify(token, config.get("signupAccKey"), async function (err, decoded) {
+    if (err) {
+      console.log(err);
+      return res.send(err.message);
+    } else {
+      const { name, email, password } = decoded;
+
+      user = await User.findOne({ email: email });
+      if (user) {
+        return res.status(400).send("User Already Registered");
+      }
+
+      user = new User({
+        name: name,
+        email: email,
+        password: password,
+      });
+
+      const salt = await bcrypt.genSalt(12);
+      user.password = await bcrypt.hash(user.password, salt);
+      user = await user.save();
+
+      const token = user.genrateAuthToken();
+
+      return res.send({
+        message: "Your Account is Activated now! Please login now..",
+      });
+    }
+  });
+});
+
+router.post("/pass_reset_request", async (req, res) => {
+  const { email } = req.body;
+
+  // checking user exists by email
+  user = await User.findOne({ email: email }).select("-password");
+  if (!user) {
+    return res.status(400).send("No user found with provided email!");
+  }
+
+  // creating jwt token using email
+  const payload = {
+    email: email,
+  };
+  const token = jwt.sign(payload, config.get("signupAccKey"), {
+    expiresIn: "20m",
+  });
+
+  // forgot pass mail sending
+
+  let obj = {
+    to: email,
+    subject: "Password Reset",
+    html: `
+    <h1>To reset password of your account follow bellow steps</h1>
+    <br>
+    <p>Link is only valid for 20 Minutes</p>
+    <p>First click on "click here" it will navigate you to our 'Password Reset' page.</p>
+    <a href = "${
+      "http://localhost:4200/forgot-password?resetPass=" + token
+    }" >Click Here</a>
+    `,
+  };
+  sendMail(mailConfig(obj), mailTransporter, res, req);
+});
+
+router.post("/reset_pass", async (req, res) => {
+
+  const { token, password } = req.body;
+  
+  jwt.verify(token, config.get("signupAccKey"), async function (err, decoded) {
+    if(err){
+      console.log(err);
+      return res.send(err.message);
+    }else{
+      const { email } = decoded;
+
+      let user = await User.findOne({ email : email });
+      if(!user){
+        return res.status(400).send({message: "User not find with provided token"})
+      }
+
+      const salt = await bcrypt.genSalt(12);
+      user.password = await bcrypt.hash(password, salt);
+      user = await user.save();
+
+      return res.send({
+        message: "Password reseted Successfully, Please login using your new password!",
+      });
+    }
+  })
+
+});
 
 module.exports = router;

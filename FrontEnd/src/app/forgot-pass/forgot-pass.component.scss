@@ -1,0 +1,21 @@
+.container{
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.card{
+  width: 50%;
+}
+
+@media(max-width:767px){
+  .card{
+    width: 100% !important;
+  }
+}
+
+.pass[readonly] {
+  background-color: white;
+  opacity: 1;
+}

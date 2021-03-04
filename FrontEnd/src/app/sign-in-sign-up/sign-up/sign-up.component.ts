@@ -12,6 +12,7 @@ import { ReCaptchaV3Service } from "ng-recaptcha";
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
+  isLoadig = false;
   passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
   constructor(
     private fb: FormBuilder,
@@ -27,31 +28,40 @@ export class SignUpComponent implements OnInit {
 
   submitForm(token) {
     try{
+      this.isLoadig = true;
       if(token){
         this.userService.registerUser(this.signUpForm.value).subscribe(
-          (data) => {
+          (data:any) => {
+            this.isLoadig = false;
+
             this._snackBar.open(
-              `Hi ${this.signUpForm.value['name']} \n Please login now using email and password`,
+              `Hi ${this.signUpForm.value['name']} \n, ${data?.message}`,
               "Success",
               {
                 duration: 4000,
               }
             );
-            this.router.navigateByUrl("user/signIn");
+            this.signUpForm.reset()
+            // this.router.navigateByUrl("user/signIn");
+
           },
           (err) => {
+            this.isLoadig = false;
             console.error(err);
             this._snackBar.open(`Error: ${err.error}`, "Failed", {
               duration: 2000,
             });
+
           }
         );
       }else{
+        this.isLoadig = false;
         this._snackBar.open(`Error: No capcha token`, "Failed", {
           duration: 2000,
         });
       }
     }catch(err){
+      this.isLoadig = false;
       console.error(err);
       this._snackBar.open(`Error: ${err}`, "Failed", {
         duration: 2000,

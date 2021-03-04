@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   authForm: FormGroup;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
     private jwtService: JwtService,

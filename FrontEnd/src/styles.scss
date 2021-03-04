@@ -39,3 +39,15 @@ body {
 .c-pointer {
   cursor: pointer;
 }
+
+.makeLink{
+  color: rgb(74, 195, 252) !important;
+  cursor: pointer !important;
+}
+
+.makeLink:hover{
+  text-decoration: underline !important;
+}
+.d-initial{
+  display: initial !important;
+}

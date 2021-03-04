@@ -52,6 +52,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { FileUploadModule } from "ng2-file-upload";
 import { FooterComponent } from './footer/footer.component';
+import { AccountActivateComponent } from './account-activate/account-activate.component';
+import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { FooterComponent } from './footer/footer.component';
     LoaderComponent,
     MyProfileComponent,
     FooterComponent,
+    AccountActivateComponent,
+    ForgotPassComponent,
 
   ],
   imports: [

@@ -5,16 +5,16 @@ const admin = require("../middlewares/admin");
 const auth = require("../middlewares/auth");
 const nodemailer = require('nodemailer');
 const config = require('config');
-const pass = config.get("pass")
+// const pass = config.get("pass")
 
-let mailTransporter = nodemailer.createTransport({ 
-  service: 'gmail', 
-  auth: { 
-      type: "login",
-      user: 'yashchouriya9@gmail.com', 
-      pass: pass
-  } 
-}); 
+// let mailTransporter = nodemailer.createTransport({ 
+//   service: 'gmail', 
+//   auth: { 
+//       type: "login",
+//       user: 'yashchouriya9@gmail.com', 
+//       pass: pass
+//   } 
+// }); 
 
 
 router.get("/",[auth,admin], async (req, res) => {
@@ -28,12 +28,12 @@ router.post("/", async (req, res) => {
     return res.status(400).send(error.details[0].message);
   }
 
-  let mailDetails = { 
-    from: 'yashchouriya9@gmai.com', 
-    to: req.body.email, 
-    subject: 'Thanks for the feedback', 
-    text: req.body.message
-};
+//   let mailDetails = { 
+//     from: 'yashchouriya9@gmai.com', 
+//     to: req.body.email, 
+//     subject: 'Thanks for the feedback', 
+//     text: req.body.message
+// };
 
   let contact = new ContactUs({
     name: req.body.name,
@@ -42,14 +42,14 @@ router.post("/", async (req, res) => {
   });
   await contact.save();
 
-  mailTransporter.sendMail(mailDetails, function(err, data) { 
-    if(err) { 
-        console.log('Error Occurs',err.message); 
-    } else { 
-        console.log('Email sent successfully : ',req.body.email); 
-        console.log(data); 
-    } 
-  }); 
+  // mailTransporter.sendMail(mailDetails, function(err, data) { 
+  //   if(err) { 
+  //       console.log('Error Occurs',err.message); 
+  //   } else { 
+  //       console.log('Email sent successfully : ',req.body.email); 
+  //       console.log(data); 
+  //   } 
+  // }); 
 
   res.send(contact);
 

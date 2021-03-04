@@ -1,0 +1,141 @@
+<app-loader *ngIf="isLoadig"></app-loader>
+
+
+<div class="container" *ngIf="!showResetPass">
+  <div class="card box_shadow">
+    <div class="card-header text-center">
+      <h3>Please Enter your registered email!</h3>
+    </div>
+    <div class="card-body p-5">
+      <div class="text-center">
+        <form [formGroup]="passResetRequest">
+          <div class="form-group mt-2 mb-4">
+            <input
+              type="email"
+              class="form-control"
+              required
+              formControlName="email"
+              placeholder="Enter your Email.."
+              [value]="this.payload?.email"
+            />
+
+            <div
+              style="margin-top: 10px"
+              *ngIf="
+                !passResetRequest.controls.email?.valid &&
+                (passResetRequest.controls.email?.dirty ||
+                  passResetRequest.controls.email?.touched)
+              "
+              class="alert alert-warning"
+            >
+              <div [hidden]="!passResetRequest.controls.email.errors.required">
+                Email is required!
+              </div>
+              <div [hidden]="!passResetRequest.controls.email.errors.email">
+                Please enter a valid email!
+              </div>
+            </div>
+          </div>
+
+          <button
+            [disabled]="!passResetRequest.valid"
+            class="btn btn-outline-success w-100 mt-2"
+            (click)="sendPassResetRequest()"
+          >
+            Send Password Reset Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="showResetPass">
+  <div class="card box_shadow">
+    <div class="card-header text-center">
+      <h3>Please enter a new password</h3>
+    </div>
+    <div class="card-body p-5">
+      <div class="text-center">
+        <form [formGroup]="resetPass">
+          <div class="form-group col-12">
+            <input type="email" class="form-control" formControlName="email" readonly />
+          </div>
+
+          <div class="form-group col-12">
+            <!-- <label for="password">Password : </label> -->
+            <input
+              class="form-control pass"
+              type="password"
+              formControlName="password"
+              required
+              placeholder="Password..."
+              onblur="this.setAttribute('readonly', 'readonly');"
+              onfocus="this.removeAttribute('readonly');"
+              readonly
+              autocomplete="new-password"
+            />
+            <div
+              style="margin-top: 10px"
+              *ngIf="
+                !resetPass.controls.password?.valid &&
+                (resetPass.controls.password?.dirty ||
+                  resetPass.controls.password?.touched)
+              "
+              class="alert alert-warning"
+            >
+              <div [hidden]="!resetPass.controls.password.errors.required">
+                Password is required!
+              </div>
+              <div [hidden]="!resetPass.controls.password.errors.pattern">
+                Please enter a password of atleast 8 character's with one captal
+                letter, one degit and one non-alphanumeric character.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-12">
+            <!-- <label for="re_password">Confirm Password</label> -->
+            <input
+              class="form-control pass"
+              type="password"
+              formControlName="re_password"
+              required
+              placeholder="Confirm Password..."
+              onblur="this.setAttribute('readonly', 'readonly');"
+              onfocus="this.removeAttribute('readonly');"
+              readonly
+              autocomplete="new-password"
+            />
+            <div
+              style="margin-top: 10px"
+              *ngIf="
+                !resetPass.controls.re_password?.valid &&
+                (resetPass.controls.re_password?.dirty ||
+                  resetPass.controls.re_password?.touched)
+              "
+              class="alert alert-warning"
+            >
+              <div [hidden]="!resetPass.controls.re_password.errors.mustMatch">
+                Confirm Password should be same as password above entered!
+              </div>
+              <div [hidden]="!resetPass.controls.re_password.errors.required">
+                Confirm Password is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-12 mt-4">
+            <button
+              class="btn btn-outline-success w-100"
+              [disabled]="!resetPass.valid"
+              (click)="resetPassword()"
+            >
+              Send Password Reset Request
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
