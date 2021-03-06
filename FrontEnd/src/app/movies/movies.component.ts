@@ -20,6 +20,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoggedIn: boolean;
   selectedGenre;
   genreFilteredArr: any[] = [];
+  isLoadig = false;
 
   constructor(
     private moviesService: MoviesService,
@@ -33,8 +34,6 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getMovies();
     this.isLoggedIn = this.authService.isLoggedIn();
     // console.log(this.isLoggedIn)
-
-
   }
 
   ngAfterViewInit() {
@@ -106,6 +105,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getMovies() {
+    this.isLoadig = true;
     this.moviesService.getMovies(this.selectedGenre).subscribe(
       (data) => {
         this.movies = data;
@@ -115,10 +115,14 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
           // console.log(this.movies,this.moviesInCart)
           this.updateMovieArr(this.movies, this.moviesInCart, true);
           // console.log(this.movies);
+          this.isLoadig = false;
+
         }, 50);
       },
       (err) => {
         console.error(err);
+        this.isLoadig = false;
+
       }
     );
   }

@@ -2,6 +2,6 @@
  "jwtPrivateKey" : "vidly_jwtSecretKey",
  "signupAccKey":"activationKey",
  "password": "pass",
- "db" : "mongodb://localhost/Vidly-Rentals",
- "test":"test"
+ "test":"test",
+ "dbpass": ""
 }
