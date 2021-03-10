@@ -27,7 +27,7 @@ export class GenreListingComponent implements OnInit {
     this.genreService.getGenres().subscribe(
       (data) => (this.filteredGenre = this.dataSource = data),
       (err) => {
-        console.error(err);
+        // console.error(err);
       }
     );
   }
@@ -44,7 +44,7 @@ export class GenreListingComponent implements OnInit {
         });
       },
       (err) => {
-        console.error(err);
+        // console.error(err);
         this._snackBar.open(`${err.error}`, "Failed!", {
           duration: 3000,
         });

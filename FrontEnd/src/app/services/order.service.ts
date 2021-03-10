@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +27,19 @@ export class OrderService {
   }
 
   orderSuccess(data){
-   return this.http.post(`${this.BASE_URL}orders`, data)
+   return this.http.post(`${environment.api_url}orders`, data)
   }
 
   getMyOrders(){
-    return this.http.get(`${this.BASE_URL}orders/my-orders`)
+    return this.http.get(`${environment.api_url}orders/my-orders`)
   }
 
   cancelOrder(data){
-    return this.http.post(`${this.BASE_URL}orders/cancel-order`, data)
+    return this.http.post(`${environment.api_url}orders/cancel-order`, data)
+  }
+
+  orderCounter(){
+    return this.http.get(`${environment.api_url}orders/order_counter`)
   }
 
 }

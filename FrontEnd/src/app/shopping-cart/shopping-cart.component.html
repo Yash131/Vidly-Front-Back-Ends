@@ -17,7 +17,7 @@
         </h3>
       </div>
 
-      <table class=" table table-hover " *ngIf="movieArr?.length">
+      <table class=" table table-hover deskcart" *ngIf="movieArr?.length">
           <thead class="thead-dark">
               <tr>
                   <th>Image</th>
@@ -34,11 +34,10 @@
                   <td><img class="productImg" [src]="movie?.image" alt=""></td>
                   <td class="align-middle">{{movie.title}}</td>
                   <td class="text-center align-middle">
-                      <!-- <product-quantity  [product]='item' [shopping-cart]='cart'></product-quantity> -->
                       1
                   </td>
                   <td class="text-right align-middle">
-                      {{movie.price | currency:'USD':true}}
+                      {{movie.price | currency}}
                   </td>
                   <td class="align-middle">
                     <button class="btn btn-danger" (click)="remMovie(movie)" style="float: right;">
@@ -57,12 +56,69 @@
                   </button>
                 </th>
                 <th class="text-center align-middle">Total Price : </th>
-                <th class="text-right align-middle">{{ cart?.totalPrice | currency:'USD':true }}</th>
+                <th class="text-right align-middle">{{ cart?.totalPrice | currency }}</th>
                 <th></th>
               </tr>
             </tfoot>
       </table>
 
+
+      <div class="card mobCart" *ngIf="movieArr?.length">
+        <div class="row">
+          <div class="card-header col-12 align-midd text-center text-white bg-dark">
+            <h5 class="mb-0 p-2">Products</h5>
+          </div>
+          <div class="card-body col-12 bg-light text-dark mb-2 mt-2" *ngFor="let movie of movieArr">
+            <div class="row">
+              <div class="col-4">
+                <img style="width: 100%;" [src]="movie?.image" alt="">
+              </div>
+              <div class="col-8">
+                <h6><span class=" align-middle mb-1 font-bold">{{movie?.title}}</span></h6>
+                <h6> <span class=" align-middle mb-1 font-bold">Price : {{movie.price | currency}}</span></h6>
+                <div class="mb-1 mt-3">
+                  <button class="btn btn-danger w-100 remMovieBtn" (click)="remMovie(movie)" >
+                    <i class="fa fa-trash-o text-right" aria-hidden="true" ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- <div class="p-2">
+              <span class="p-1"><img class="productImg" [src]="movie?.image" alt=""></span>
+              <span class="p-1 align-middle font-18 font-bold">{{movie?.title}}</span>
+            </div>
+            <div class="p-2">
+              <span>
+                <button class="btn btn-danger w-50 p-2" (click)="remMovie(movie)" >
+                  <i class="fa fa-trash-o text-right" aria-hidden="true" ></i>
+                </button>
+              </span>
+
+              <span class="p-1 align-middle font-18 font-bold">Price : {{movie.price | currency}}</span>
+            </div> -->
+          </div>
+
+
+
+
+
+          <div class="card-footer w-100">
+            <span class="col-6">
+              <button type="button" class="btn btn-danger btn-sm w-50 p-2" (click)="clearCart()">
+                <i class="fa fa-trash-o" aria-hidden="true" style="margin-right: 5px;"></i>Clear Cart
+              </button>
+            </span>
+            <span class="p-1 align-middle font-18 font-bold col-6">
+              Total : {{ cart?.totalPrice | currency }}
+            </span>
+
+
+          </div>
+        </div>
+      </div>
 
 
     </div>

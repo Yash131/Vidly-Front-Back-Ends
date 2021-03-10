@@ -3,5 +3,9 @@
  "signupAccKey":"activationKey",
  "password": "pass",
  "test":"test",
- "dbpass": ""
+ "db": "mongodb://localhost/Vidly-Rentals",
+ "frontendLink" : "http://localhost:4200",
+ "cloud_name": "dgai2ubax" ,
+ "api_key": "259124695318373" ,
+ "api_secret": "PaV3nfrlz-vQHuLweSeausvC8YA"
 }

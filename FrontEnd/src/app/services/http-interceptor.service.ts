@@ -18,10 +18,12 @@ export class HttpInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
     const headersConfig = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      // "Content-Type": "application/json",
+      // Accept: "application/json",
     };
+
     const token = localStorage.getItem('jwt_token');
     if (token !== null) {
       headersConfig["Authorization"] = token;

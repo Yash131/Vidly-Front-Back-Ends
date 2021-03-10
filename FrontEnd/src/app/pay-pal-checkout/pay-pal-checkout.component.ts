@@ -63,16 +63,23 @@ export class PayPalCheckoutComponent implements OnInit {
             let paypal = await actions.order.capture();
             self.payloadGenerate(paypal);
           } catch (error) {
-            console.error(error);
+            // console.error(error);
           }
           return;
+        },
+        onCancel : (error) => {
+          self.isLoadig = false;
+          self._snackBar.open(`Please try again something went wrong!`, "Failed", {
+            duration: 8000,
+          });
+          // console.error(error);
         },
         onError: (error) => {
           self.isLoadig = false;
           self._snackBar.open(`Please try again something went wrong!`, "Failed", {
-            duration: 3000,
+            duration: 8000,
           });
-          console.error(error);
+          // console.error(error);
         },
       })
       .render(this.paypalRefEl.nativeElement);
@@ -92,13 +99,13 @@ export class PayPalCheckoutComponent implements OnInit {
 
     this.orderSer.orderSuccess(obj).subscribe(
       async (res: any) => {
-        console.log(res);
+        // console.log(res);
         try{
           this.cartService.emptyWholeCart().subscribe((res:any) => {
             this.cartService.sendCartData(res?.data)
           },(err) => {
             this.isLoadig = false;
-            console.error(err);
+            // console.error(err);
 
           })
           this._snackBar.open(`Order Placed Successfully`, "Success", {
@@ -106,11 +113,11 @@ export class PayPalCheckoutComponent implements OnInit {
           });
           this.router.navigate(['order-success'])
         }catch(e){
-          console.error(e)
+          // console.error(e)
         }
       },
       (err: any) => {
-        console.error(err);
+        // console.error(err);
       }
     );
   }

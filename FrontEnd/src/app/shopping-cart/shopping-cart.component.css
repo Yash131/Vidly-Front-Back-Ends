@@ -1,4 +1,4 @@
-.tableShadow{
+.tableShadow {
   background-color: white;
   border-radius: 6px;
   box-shadow: -1rem 0 3rem #717171;
@@ -6,10 +6,16 @@
   border: none !important ;
 }
 
-.productImg{
+.productImg {
   height: 66px;
   width: 66px;
   background-position: center;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.remMovieBtn {
+  bottom: 0 !important;
+  width: 89% !important;
+  position: absolute !important;
 }

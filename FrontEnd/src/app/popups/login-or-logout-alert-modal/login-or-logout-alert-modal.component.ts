@@ -19,7 +19,7 @@ export class LoginOrLogoutAlertModalComponent implements OnInit {
         this.modalData = res
       },
       (err) => {
-        console.error(err)
+        // console.error(err)
       }
     )
   }

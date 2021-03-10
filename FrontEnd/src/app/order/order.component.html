@@ -9,288 +9,293 @@
   </blockquote>
 </div>
 
-<!-- Live Orders -->
+<div *ngIf="myOrders?.length">
+  <!-- Live Orders -->
 
-<div>
-  <h2 class="text-center mb-2">Live Orders</h2>
-  <div class="container orderContainer" style="overflow: hidden">
-    <ng-container *ngFor="let order of liveOrders">
-      <mat-accordion>
-        <mat-expansion-panel
-          class="mb-3"
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-description>
-              <b>Placed On :</b>
-              <span class="px-1">{{
-                order?.createdAt | date: "MMMM d, y, h:mm:ss a"
-              }}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="col-12 col-md-6 mt-3">
-              <ul class="list-group list-group-flush box_shadow">
-                <li
-                  *ngFor="let item of order?.products"
-                  class="list-group-item"
-                >
-                  <div class="float-left">
-                    <span class="px-1">
-                      <img class="productImg" [src]="item?.image" alt="" />
-                    </span>
-                    <span class="px-1">{{ item?.title }}</span>
-                  </div>
-                  <div class="float-right">
-                    {{ item?.price | currency }}
-                  </div>
-                </li>
-                <li class="list-group-item font-weight-bold align-middle">
-                  Total
-                  <div class="float-right align-middle">
-                    {{ order?.totalPrice | currency }}
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="col-12 col-md-6 mt-3">
-              <ul class="list-group list-group-flush box_shadow">
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Order ID : </b
-                        ><span class="px-1">{{ order?._id }} </span>
-                      </span>
-                    </div>
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Payment RefID : </b
-                        ><span class="px-1">{{
-                          order?.paymentModeData?.id
-                        }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Mobile : </b
-                        ><span class="px-1"
-                          >{{ order?.shippingDetails.mobile }}
-                        </span>
-                      </span>
-                    </div>
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Email : </b
-                        ><span class="px-1">{{
-                          order?.shippingDetails.email
-                        }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 col-md-6 px-2">
-                      <span class="">
-                        <b>Order Status : </b
-                        ><span class="px-1">{{ order?.orderStatus }} </span>
-                      </span>
-                    </div>
-                    <div class="col-12 col-md-6 px-2">
-                      <span class="">
-                        <b>Payment Mode : </b
-                        ><span class="px-1">{{ order?.paymentMode }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="">
-                    <b>Shipping Details : </b>
-                  </div>
-                  <div class="mt-1">
-                    <small>
-                      <b>
-                        {{ order?.shippingDetails.name }}
-                        {{ order?.shippingDetails.addressLine1 }}
-                        {{ order?.shippingDetails.addressLine2 }}
-                      </b>
-                    </small>
-                  </div>
-                </li>
-
-                <li
-                  class="list-group-item text-center"
-                  *ngIf="order?.orderStatus != 'Cancelled'"
-                >
-                  <button
-                    class="btn btn-outline-danger w-50 mt-1 mb-1"
-                    data-toggle="modal"
-                    data-target="#orderCancelModal"
-                    (click)="currOrder(order)"
+  <div>
+    <h2 class="text-center mb-2">Live Orders</h2>
+    <div class="container orderContainer" style="overflow: hidden">
+      <ng-container *ngFor="let order of liveOrders">
+        <mat-accordion>
+          <mat-expansion-panel
+            class="mb-3"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                <b>Placed On :</b>
+                <span class="px-1">{{
+                  order?.createdAt | date: "MMMM d, y, h:mm:ss a"
+                }}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+              <div class="col-12 col-md-6 mt-3">
+                <ul class="list-group list-group-flush box_shadow">
+                  <li
+                    *ngFor="let item of order?.products"
+                    class="list-group-item"
                   >
-                    Cancel Order
-                  </button>
-                </li>
-              </ul>
+                    <div class="float-left">
+                      <span class="px-1">
+                        <img class="productImg" [src]="item?.image" alt="" />
+                      </span>
+                      <span class="px-1">{{ item?.title }}</span>
+                    </div>
+                    <div class="float-right">
+                      {{ item?.price | currency }}
+                    </div>
+                  </li>
+                  <li class="list-group-item font-weight-bold align-middle">
+                    Total
+                    <div class="float-right align-middle">
+                      {{ order?.totalPrice | currency }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 mt-3">
+                <ul class="list-group list-group-flush box_shadow">
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Order ID : </b
+                          ><span class="px-1">{{ order?._id }} </span>
+                        </span>
+                      </div>
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Payment RefID : </b
+                          ><span class="px-1">{{
+                            order?.paymentModeData?.id
+                          }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Mobile : </b
+                          ><span class="px-1"
+                            >{{ order?.shippingDetails.mobile }}
+                          </span>
+                        </span>
+                      </div>
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Email : </b
+                          ><span class="px-1">{{
+                            order?.shippingDetails.email
+                          }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 col-md-6 px-2">
+                        <span class="">
+                          <b>Order Status : </b
+                          ><span class="px-1">{{ order?.orderStatus }} </span>
+                        </span>
+                      </div>
+                      <div class="col-12 col-md-6 px-2">
+                        <span class="">
+                          <b>Payment Mode : </b
+                          ><span class="px-1">{{ order?.paymentMode }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="">
+                      <b>Shipping Details : </b>
+                    </div>
+                    <div class="mt-1">
+                      <small>
+                        <b>
+                          {{ order?.shippingDetails.name }}
+                          {{ order?.shippingDetails.addressLine1 }}
+                          {{ order?.shippingDetails.addressLine2 }}
+                        </b>
+                      </small>
+                    </div>
+                  </li>
+
+                  <li
+                    class="list-group-item text-center"
+                    *ngIf="order?.orderStatus != 'Cancelled'"
+                  >
+                    <button
+                      class="btn btn-outline-danger w-50 mt-1 mb-1"
+                      data-toggle="modal"
+                      data-target="#orderCancelModal"
+                      (click)="currOrder(order)"
+                    >
+                      Cancel Order
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-container>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Cancelled Orders -->
+
+  <div>
+    <h2 class="text-center mb-2">Cancelled Orders</h2>
+    <div class="container orderContainer" style="overflow: hidden">
+      <ng-container *ngFor="let order of cancelledOrders">
+        <mat-accordion>
+          <mat-expansion-panel
+            class="mb-3"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                <b>Placed On :</b>
+                <span class="px-1">{{
+                  order?.createdAt | date: "MMMM d, y, h:mm:ss a"
+                }}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+              <div class="col-12 col-md-6 mt-3">
+                <ul class="list-group list-group-flush box_shadow">
+                  <li
+                    *ngFor="let item of order?.products"
+                    class="list-group-item"
+                  >
+                    <div class="float-left">
+                      <span class="px-1">
+                        <img class="productImg" [src]="item?.image" alt="" />
+                      </span>
+                      <span class="px-1">{{ item?.title }}</span>
+                    </div>
+                    <div class="float-right">
+                      {{ item?.price | currency }}
+                    </div>
+                  </li>
+                  <li class="list-group-item font-weight-bold align-middle">
+                    Total
+                    <div class="float-right align-middle">
+                      {{ order?.totalPrice | currency }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 mt-3">
+                <ul class="list-group list-group-flush box_shadow">
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Order ID : </b
+                          ><span class="px-1">{{ order?._id }} </span>
+                        </span>
+                      </div>
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Payment RefID : </b
+                          ><span class="px-1">{{
+                            order?.paymentModeData?.id
+                          }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Mobile : </b
+                          ><span class="px-1"
+                            >{{ order?.shippingDetails.mobile }}
+                          </span>
+                        </span>
+                      </div>
+                      <div class="col-12 px-2">
+                        <span class="">
+                          <b>Email : </b
+                          ><span class="px-1">{{
+                            order?.shippingDetails.email
+                          }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-12 col-md-6 px-2">
+                        <span class="">
+                          <b>Order Status : </b
+                          ><span class="px-1">{{ order?.orderStatus }} </span>
+                        </span>
+                      </div>
+                      <div class="col-12 col-md-6 px-2">
+                        <span class="">
+                          <b>Payment Mode : </b
+                          ><span class="px-1">{{ order?.paymentMode }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="">
+                      <b>Shipping Details : </b>
+                    </div>
+                    <div class="mt-1">
+                      <small>
+                        <b>
+                          {{ order?.shippingDetails.name }}
+                          {{ order?.shippingDetails.addressLine1 }}
+                          {{ order?.shippingDetails.addressLine2 }}
+                        </b>
+                      </small>
+                    </div>
+                  </li>
+
+                  <li
+                    class="list-group-item text-center"
+                    *ngIf="order?.orderStatus != 'Cancelled'"
+                  >
+                    <button
+                      class="btn btn-outline-danger w-50 mt-1 mb-1"
+                      data-toggle="modal"
+                      data-target="#orderCancelModal"
+                      (click)="currOrder(order)"
+                    >
+                      Cancel Order
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+    </div>
   </div>
 </div>
 
-<!-- Cancelled Orders -->
-
-<div>
-  <h2 class="text-center mb-2">
-    Cancelled Orders
-  </h2>
-  <div class="container orderContainer" style="overflow: hidden">
-    <ng-container *ngFor="let order of cancelledOrders">
-      <mat-accordion>
-        <mat-expansion-panel
-          class="mb-3"
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-description>
-              <b>Placed On :</b>
-              <span class="px-1">{{
-                order?.createdAt | date: "MMMM d, y, h:mm:ss a"
-              }}</span>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="col-12 col-md-6 mt-3">
-              <ul class="list-group list-group-flush box_shadow">
-                <li
-                  *ngFor="let item of order?.products"
-                  class="list-group-item"
-                >
-                  <div class="float-left">
-                    <span class="px-1">
-                      <img class="productImg" [src]="item?.image" alt="" />
-                    </span>
-                    <span class="px-1">{{ item?.title }}</span>
-                  </div>
-                  <div class="float-right">
-                    {{ item?.price | currency }}
-                  </div>
-                </li>
-                <li class="list-group-item font-weight-bold align-middle">
-                  Total
-                  <div class="float-right align-middle">
-                    {{ order?.totalPrice | currency }}
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="col-12 col-md-6 mt-3">
-              <ul class="list-group list-group-flush box_shadow">
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Order ID : </b
-                        ><span class="px-1">{{ order?._id }} </span>
-                      </span>
-                    </div>
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Payment RefID : </b
-                        ><span class="px-1">{{
-                          order?.paymentModeData?.id
-                        }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Mobile : </b
-                        ><span class="px-1"
-                          >{{ order?.shippingDetails.mobile }}
-                        </span>
-                      </span>
-                    </div>
-                    <div class="col-12 px-2">
-                      <span class="">
-                        <b>Email : </b
-                        ><span class="px-1">{{
-                          order?.shippingDetails.email
-                        }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-12 col-md-6 px-2">
-                      <span class="">
-                        <b>Order Status : </b
-                        ><span class="px-1">{{ order?.orderStatus }} </span>
-                      </span>
-                    </div>
-                    <div class="col-12 col-md-6 px-2">
-                      <span class="">
-                        <b>Payment Mode : </b
-                        ><span class="px-1">{{ order?.paymentMode }}</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="">
-                    <b>Shipping Details : </b>
-                  </div>
-                  <div class="mt-1">
-                    <small>
-                      <b>
-                        {{ order?.shippingDetails.name }}
-                        {{ order?.shippingDetails.addressLine1 }}
-                        {{ order?.shippingDetails.addressLine2 }}
-                      </b>
-                    </small>
-                  </div>
-                </li>
-
-                <li
-                  class="list-group-item text-center"
-                  *ngIf="order?.orderStatus != 'Cancelled'"
-                >
-                  <button
-                    class="btn btn-outline-danger w-50 mt-1 mb-1"
-                    data-toggle="modal"
-                    data-target="#orderCancelModal"
-                    (click)="currOrder(order)"
-                  >
-                    Cancel Order
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-container>
+<div *ngIf="!myOrders?.length" class="container mb-5 mt-5">
+  <div class="card p-5 box_shadow">
+    <h3 class="text-center">No Orders Found!</h3>
   </div>
 </div>
-
 
 <div
   class="modal fade"

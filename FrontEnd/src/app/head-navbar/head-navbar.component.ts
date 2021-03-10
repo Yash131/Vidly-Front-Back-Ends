@@ -15,7 +15,7 @@ declare var $: any;
   styleUrls: ["./head-navbar.component.scss"],
 })
 export class HeadNavbarComponent implements OnInit, OnDestroy {
-  user: User;
+  user;
   iswebApp: boolean = true;
   isMobileApp: boolean = false;
   isTablet: boolean = false;
@@ -29,7 +29,9 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private cartService: CartService,
     private userService : UserService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.getScreenSize();
@@ -97,7 +99,7 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
         // let cookie = this.cookieService.get('userInfo')
       },
       (err) => {
-        console.error(err.error);
+        // console.error(err.error);
       }
     );
   }
@@ -108,7 +110,7 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
         this.totalItemInCart = res.totalItems;
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -127,6 +129,14 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
       this.router.navigate(["cart"])
     }
 
+  }
+
+  closeNav(){
+    if(this.isMobileApp){
+      $('.navbar-collapse a').click(function(){
+        $(".navbar-collapse").collapse('hide');
+      });
+    }
   }
 
   ngOnDestroy() {

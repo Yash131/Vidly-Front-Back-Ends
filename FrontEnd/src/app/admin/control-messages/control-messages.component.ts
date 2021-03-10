@@ -25,12 +25,12 @@ export class ControlMessagesComponent implements OnInit {
   getMessages() {
     this.contactUsService.getContacts().subscribe(
       (data) => {
-        console.log(this.filteredContact);
-        
+        // console.log(this.filteredContact);
+
         this.filteredContact = this.contact = data;
       },
       (err) => {
-        console.error(err.error);
+        // console.error(err.error);
       }
     );
   }
@@ -47,7 +47,7 @@ export class ControlMessagesComponent implements OnInit {
         });
       },
       (err) => {
-        console.error(err);
+        // console.error(err);
         this._snackBar.open(`${err.error}`, "Failed!", {
           duration: 3000,
         });

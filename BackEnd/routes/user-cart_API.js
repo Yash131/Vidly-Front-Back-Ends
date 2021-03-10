@@ -121,9 +121,9 @@ router.delete("/removeAMovie/:id", auth, async (req, res) => {
     return res.send({ status: "Cart Is Already Empty!" });
   }
 
-  let indexOfMovie = cart?.products.findIndex((el) => el._id == movieObjId);
+  let indexOfMovie = cart.products.findIndex((el) => el._id == movieObjId);
 
-  const movie = await Movie.findById(cart.products[indexOfMovie]?.movieID);
+  const movie = await Movie.findById(cart.products[indexOfMovie].movieID);
   if (!movie) {
     return res.status(400).send("Invalid Movie ID.");
   }
@@ -136,9 +136,9 @@ router.delete("/removeAMovie/:id", auth, async (req, res) => {
   }
 
   cart.totalPrice = parseInt(
-    cart.totalPrice - cart.products[indexOfMovie]?.price
+    cart.totalPrice - cart.products[indexOfMovie].price
   );
-  cart?.products.splice(indexOfMovie, 1);
+  cart.products.splice(indexOfMovie, 1);
 
   cart = await cart.save();
   return res.send({

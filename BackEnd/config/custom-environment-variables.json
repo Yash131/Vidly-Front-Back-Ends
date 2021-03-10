@@ -3,5 +3,9 @@
     "signupAccKey":"activationKey",
     "password" : "pass",
     "test":"test",
-    "dbpass": "dbPass"
+    "db": "vidly_db",
+    "frontendLink" : "frontendLink",
+    "cloud_name": "cloud_name" ,
+    "api_key": "api_key" ,
+    "api_secret": "api_secret"
 }

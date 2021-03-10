@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpEvent } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, Subject } from "rxjs";
 import { User, RegUser } from "../models/user";
@@ -53,9 +53,18 @@ export class UserService {
   }
 
   passReset(data) {
+    return this.httpClient.post(`${environment.api_url}users/reset_pass`, data);
+  }
+
+  profilePicUpload(data) {
+
+    let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.delete('Accept')
+        headers = headers.delete('Content-Type')
+
     return this.httpClient.post(
-      `${environment.api_url}users/reset_pass`,
-      data
+      `${environment.api_url}users/profilePic`,
+      data, { headers: headers }
     );
   }
 }

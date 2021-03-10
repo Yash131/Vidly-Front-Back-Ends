@@ -62,13 +62,46 @@ router.post("/cancel-order", auth, async (req, res) => {
     }
   );
 
-  if(!updateOrder){ return res.status(404).send({message : "Order not found"}) }
+  if (!updateOrder) {
+    return res.status(404).send({ message: "Order not found" });
+  }
   updateOrder = await updateOrder.save();
-  
-  console.log(updateOrder.orderStatus)
 
-  return res.send({message : "Order Cancelled Successfully", data : updateOrder})
+  console.log(updateOrder.orderStatus);
 
+  return res.send({
+    message: "Order Cancelled Successfully",
+    data: updateOrder,
+  });
+});
+
+router.get("/order_counter", auth, async (req, res) => {
+  const userID = req.user._id;
+  console.log(userID);
+  let user = await User.findById(userID);
+  if (!user) {
+    return res.status(400).send("Invalid user ID.");
+  }
+
+  let cancelledOrder = await Order.find({
+    "userDetails._id": userID,
+    orderStatus: "Cancelled",
+  });
+  let totalOrder = await Order.find({ "userDetails._id": userID });
+
+  let data = {
+    totalOrders: totalOrder.length,
+    cancelledOrders: cancelledOrder.length,
+  };
+
+  if (!totalOrder.length) {
+    return res.status(201).send({ message: "No orders found!", data: data });
+  }
+
+  return res.send({
+    status: "Success",
+    data: data,
+  });
 });
 
 module.exports = router;

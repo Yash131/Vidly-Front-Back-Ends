@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,14 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './order-success-page.component.html',
   styleUrls: ['./order-success-page.component.css']
 })
-export class OrderSuccessPageComponent implements OnInit {
+export class OrderSuccessPageComponent {
+  private zone: NgZone
 
-  constructor(private router : Router) { }
 
-  ngOnInit(): void {
-  }
+  constructor(private ngZone: NgZone, private router: Router) {}
 
-  navToOrders(){
-    this.router.navigateByUrl('/my-orders')
+  public navigate(commands: any[]): void {
+      this.ngZone.run(() => this.router.navigate(commands)).then();
   }
 }

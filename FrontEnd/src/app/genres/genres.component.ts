@@ -29,7 +29,7 @@ export class GenresComponent implements OnInit {
         this.genres.unshift(this.any)
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
     this.genreService.sendGenreData("any");

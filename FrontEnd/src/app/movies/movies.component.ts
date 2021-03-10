@@ -15,13 +15,13 @@ declare var $: any;
 export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   movies: Movies[] = [];
+  filteredMovies: any[] = [];
   moviesInCart: any[] = [];
   inCart: Boolean = false;
   isLoggedIn: boolean;
   selectedGenre;
   genreFilteredArr: any[] = [];
   isLoadig = false;
-
   constructor(
     private moviesService: MoviesService,
     private cartService: CartService,
@@ -84,7 +84,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         );
       } catch (e) {
-        console.error(e);
+        // console.error(e);
       }
   }
 
@@ -99,7 +99,7 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.getMovies();
         },
         (err) => {
-          console.error(err);
+          // console.error(err);
         }
       );
   }
@@ -108,19 +108,20 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoadig = true;
     this.moviesService.getMovies(this.selectedGenre).subscribe(
       (data) => {
-        this.movies = data;
+        this.filteredMovies = this.movies = data;
         // console.log(this.movies)
         // this.updateMovieArr(this.movies, this.moviesInCart, true);
         setTimeout(() => {
           // console.log(this.movies,this.moviesInCart)
           this.updateMovieArr(this.movies, this.moviesInCart, true);
           // console.log(this.movies);
+
           this.isLoadig = false;
 
         }, 50);
       },
       (err) => {
-        console.error(err);
+        // console.error(err);
         this.isLoadig = false;
 
       }
@@ -162,5 +163,14 @@ export class MoviesComponent implements OnInit, AfterViewInit, OnDestroy {
       //   this.inCart = null;
       // }
     }
+  }
+
+
+  filter(search: string) {
+    this.filteredMovies = search
+      ? this.movies.filter((p) =>
+          p.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
+      : this.movies;
   }
 }

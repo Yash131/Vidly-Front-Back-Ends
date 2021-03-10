@@ -44,7 +44,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
       this.passResetRequestForm();
     }
 
-    console.log(this.token);
+    // console.log(this.token);
   }
 
   ngAfterViewInit() {}
@@ -57,7 +57,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
           .passResetRequest(this.passResetRequest.value.email)
           .subscribe(
             (res: any) => {
-              console.log(res);
+              // console.log(res);
               this.isLoadig = false;
               this.resetForms();
               this.router.navigate([""]);
@@ -66,7 +66,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
               });
             },
             (err: any) => {
-              console.log(err.message);
+              // console.log(err.message);
               this.isLoadig = false;
               this.resetForms();
               this.snackBar.open(err.message, "Failed", {
@@ -76,7 +76,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
           );
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       this.isLoadig = false;
       this.snackBar.open(e, "Failed", {
         duration: 10000,
@@ -95,7 +95,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
 
         this.userService.passReset(obj).subscribe(
           (res: any) => {
-            console.log(res);
+            // console.log(res);
             this.isLoadig = false;
             this.resetForms();
             this.router.navigateByUrl("user/signIn");
@@ -104,7 +104,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
             });
           },
           (err: any) => {
-            console.log(err.message);
+            // console.log(err.message);
             this.isLoadig = false;
             this.resetForms();
             this.snackBar.open(err.message, "Failed", {
@@ -114,7 +114,7 @@ export class ForgotPassComponent implements OnInit, AfterViewInit {
         );
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       this.isLoadig = false;
       this.snackBar.open(e, "Failed", {
         duration: 10000,

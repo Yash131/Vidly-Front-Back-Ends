@@ -18,13 +18,13 @@ export class ShoppingCartComponent implements OnInit {
 
   getCart(){
     this.cartService.itemsOfCart().subscribe( (response:any) => {
-      console.log(response);
+      // console.log(response);
       this.cartService.sendCartData(response)
       this.cart = response
       this.movieArr = response?.products
-      console.log(this.movieArr)
+      // console.log(this.movieArr)
     },(err) => {
-      console.log(err);
+      // console.log(err);
     })
   }
   clearCart(){
@@ -34,10 +34,10 @@ export class ShoppingCartComponent implements OnInit {
         this.cart = res.data;
         this.getCart();
       },(err)=>{
-        console.log(err);
+        // console.log(err);
       } )
     } catch (err) {
-      console.log(err);
+      // console.log(err);
 
     }
   }
@@ -50,7 +50,7 @@ export class ShoppingCartComponent implements OnInit {
       this.cartService.sendCartData(res.data)
       this.getCart();
     }, (err)=>{
-      console.log(err)
+      // console.log(err)
     } )
   }
 

@@ -1,4 +1,4 @@
-<div class="navContainer">
+<div class="navContainer box_shadow">
   <nav
     id="header"
     class="navbar headers navbar-light"
@@ -108,20 +108,38 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active">Home </a>
+          <a
+            class="nav-link"
+            routerLink=""
+            routerLinkActive="active"
+            (click)="closeNav()"
+            >Home
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="movies" routerLinkActive="active"
+          <a
+            class="nav-link"
+            routerLink="movies"
+            routerLinkActive="active"
+            (click)="closeNav()"
             >Movies</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="aboutUs" routerLinkActive="active"
+          <a
+            class="nav-link"
+            routerLink="aboutUs"
+            routerLinkActive="active"
+            (click)="closeNav()"
             >About Us</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="contactUs" routerLinkActive="active"
+          <a
+            class="nav-link"
+            routerLink="contactUs"
+            routerLinkActive="active"
+            (click)="closeNav()"
             >Contact Us</a
           >
         </li>
@@ -129,7 +147,7 @@
           <a
             class="nav-link cursor-p"
             routerLinkActive="active"
-            (click)="goToCart()"
+            (click)="goToCart(); closeNav()"
           >
             <!-- <i class="fa fa-shopping-cart px-1" aria-hidden="true"></i>
             Cart
@@ -151,6 +169,7 @@
               class="nav-link"
               routerLink="user/signIn"
               routerLinkActive="active"
+              (click)="closeNav()"
               >Login/Signup</a
             >
           </li>
@@ -168,9 +187,14 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+            <a
+              class="nav-link dropdown-toggle c-pointer"
+              data-toggle="dropdown"
+            >
               {{ user.name
-              }}<i class="fa fa-user-circle fa-lg px-1" aria-hidden="true"></i>
+              }}
+              <img *ngIf="user?.photo" [src]="user?.photo" alt="" class="userImg">
+              <i *ngIf="!user?.photo" class="fa fa-user-circle fa-lg px-1" aria-hidden="true"></i>
             </a>
             <div class="dropdown-menu navDropDownMenu">
               <a
@@ -191,7 +215,7 @@
               <a
                 routerLink=""
                 id="dropDownLink"
-                (click)="logout()"
+                (click)="logout();"
                 class="dropdown-item"
                 >Logout</a
               >

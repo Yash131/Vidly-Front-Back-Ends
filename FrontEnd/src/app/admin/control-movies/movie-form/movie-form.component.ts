@@ -42,10 +42,10 @@ export class MovieFormComponent implements OnInit {
     this.genreService.getGenres().subscribe(
       (data) => {
         this.genres = data;
-        console.log(data);
+        // console.log(data);
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -84,16 +84,16 @@ export class MovieFormComponent implements OnInit {
     } else {
       this.movieService.postMovie(this.movieForm.value).subscribe(
         (data) => {
-          console.log(this.movieForm.value);
+          // console.log(this.movieForm.value);
           this.router.navigateByUrl('/movies/listing')
           this._snackBar.open(`Movie Submitted`, "Success", {
             duration: 3000,
           });
         },
         (err) => {
-          console.log(this.movieForm.value);
+          // console.log(this.movieForm.value);
 
-          console.error(err.error);
+          // console.error(err.error);
           this._snackBar.open(`Error: ${err.error}`, "Failed!", {
             duration: 3000,
           });
@@ -118,7 +118,7 @@ export class MovieFormComponent implements OnInit {
             this.movieForm.patchValue(this.movie);
           },
           (err) => {
-            console.error(err.error);
+            // console.error(err.error);
             this._snackBar.open(`Error: ${err.error}`, "Failed!", {
               duration: 3000,
             });

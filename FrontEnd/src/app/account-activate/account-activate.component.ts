@@ -21,7 +21,7 @@ export class AccountActivateComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get("token");
-    console.log(this.token);
+    // console.log(this.token);
   }
 
   activateAcc() {

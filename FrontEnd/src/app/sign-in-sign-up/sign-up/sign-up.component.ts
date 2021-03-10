@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
           },
           (err) => {
             this.isLoadig = false;
-            console.error(err);
+            // console.error(err);
             this._snackBar.open(`Error: ${err.error}`, "Failed", {
               duration: 2000,
             });
@@ -62,7 +62,7 @@ export class SignUpComponent implements OnInit {
       }
     }catch(err){
       this.isLoadig = false;
-      console.error(err);
+      // console.error(err);
       this._snackBar.open(`Error: ${err}`, "Failed", {
         duration: 2000,
       });

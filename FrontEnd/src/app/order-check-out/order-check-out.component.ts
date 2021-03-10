@@ -60,7 +60,7 @@ export class OrderCheckOutComponent implements OnInit {
     this.cartService.itemsOfCart().subscribe( (res:any)=>{
       this.cart = res;
     },(err:any)=>{
-      console.error(err);
+      // console.error(err);
     } )
   }
 
@@ -71,7 +71,7 @@ export class OrderCheckOutComponent implements OnInit {
 
     },
     (err:any)=>{
-      console.error(err);
+      // console.error(err);
     }  )
   }
 

@@ -47,14 +47,14 @@ export class GenreFormComponent implements OnInit {
       // creates Genre
       this.genreService.postGenres(this.genreForm.value).subscribe(
         (data) => {
-          console.log(data);
+          // console.log(data);
           this._snackBar.open("Genre Created.", "Success", {
             duration: 3000,
           });
           this.router.navigateByUrl("/genres/listing");
         },
         (err) => {
-          console.error(err);
+          // console.error(err);
           this._snackBar.open(`Error: ${err.error}`, "Failed!", {
             duration: 3000,
           });
@@ -84,7 +84,7 @@ export class GenreFormComponent implements OnInit {
           this.genreForm.patchValue(this.genre);
         },
         (err) => {
-          console.error(err.error);
+          // console.error(err.error);
           this._snackBar.open(`Error: ${err.error}`, "Failed!", {
             duration: 3000,
           });

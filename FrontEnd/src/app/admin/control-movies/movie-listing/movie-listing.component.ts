@@ -26,11 +26,11 @@ export class MovieListingComponent implements OnInit {
   getAllMovies() {
     this.movieService.getMovies("any").subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.movies = data;
       },
       (err) => {
-        console.error(err.error);
+        // console.error(err.error);
       }
     );
   }
@@ -47,7 +47,7 @@ export class MovieListingComponent implements OnInit {
         });
       },
       (err) => {
-        console.error(err);
+        // console.error(err);
         this._snackBar.open(`${err.error}`, "Failed!", {
           duration: 3000,
         });
