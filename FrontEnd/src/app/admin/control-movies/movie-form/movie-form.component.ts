@@ -20,7 +20,8 @@ import { Movies } from "src/app/models/movies";
 export class MovieFormComponent implements OnInit {
   genres: Genres[] = [];
   movieForm: FormGroup;
-  movie: Movies;
+  movie;
+  selectedGenre;
 
   constructor(
     private genreService: GenresService,
@@ -115,7 +116,10 @@ export class MovieFormComponent implements OnInit {
         this.movieService.getAMovie(id).subscribe(
           (data) => {
             this.movie = data;
+            // console.log(this.movieForm.value, this.movie)
             this.movieForm.patchValue(this.movie);
+            this.movieForm.get('genreId').patchValue(this.movie?.genre?._id)
+            // this.selectedGenre = this.movie.genreId
           },
           (err) => {
             // console.error(err.error);

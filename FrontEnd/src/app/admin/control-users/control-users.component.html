@@ -1,1 +1,48 @@
-<p>control-users works!</p>
+<button class="btn btn-outline-dark px-3 m-3"  routerLink="/adminPanel">Back</button>
+
+
+<div class="container mt-5 mb-5">
+  <div class="box_shadow br-6 py-5 text-center bg-white">
+    <h2 class="heading">Vildy Users</h2>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <input class="box_shadow br-6 form-control p-3 bg-white" type="text" placeholder="search user by email.." #input (keyup)="filter(input.value)">
+</div>
+
+
+<div class="container mt-3 mb-5">
+  <div class="card">
+    <ng-container *ngFor="let user of filteredusers">
+      <div class="card-header bg-dark text-light">
+        <div>
+          <span class="align-middle"> <b>Name :</b> {{ user?.name }}</span>
+          <span class="float-right">
+            <button class="btn btn-outline-danger px-5" [disabled]='true' >Block User</button>
+          </span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 col-12 mb-3 text-center">
+            <img class="userImg" [src]="user?.photo ? user.photo : '../../../assets/img/user-img-icon.png' " alt="">
+          </div>
+          <div class="col-md-8 col-12 ">
+            <div>
+              <p><b>Email : </b>{{ user?.email ? user.email : 'Not Provided Yet'  }}</p>
+            </div>
+            <div>
+              <p><b>Mobile : </b>{{ user?.mobile ? user.mobile : 'Not Provided Yet' }}</p>
+            </div>
+            <div>
+              <p><b>Address : </b>{{ user?.address ? user.address : 'Not Provided Yet'  }}</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </ng-container>
+  </div>
+</div>

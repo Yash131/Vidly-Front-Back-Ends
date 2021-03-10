@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { Subscription } from "rxjs";
@@ -25,10 +25,11 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private jwtService: JwtService,
-    private router: Router,
+    public router: Router,
     private cookieService: CookieService,
     private cartService: CartService,
-    private userService : UserService
+    private userService: UserService,
+    private ngZone: NgZone
   ) {
 
   }
@@ -45,7 +46,9 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
       this.totalItemInCart = res?.products?.length;
     });
 
-    this.subscriptions = this.userService.userInfoSource$.subscribe( (res) => {this.user = res} )
+    this.subscriptions = this.userService.userInfoSource$.subscribe((res) => {
+      this.user = res;
+    });
   }
 
   getScreenSize() {
@@ -69,18 +72,15 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-
     if (this.isLoggedIn) {
       let data = {
         action: "logout",
         modalTitle: "Are you sure you want to logout?",
-        text:
-          `If you will logout you want be able to access the shopping cart or adding movies in the cart.`,
+        text: `If you will logout you want be able to access the shopping cart or adding movies in the cart.`,
       };
       this.authService.sendLoginLogoutModalData(data);
       $("#loginLogoutModal").modal("show");
     }
-
   }
 
   getCurrentUserData() {
@@ -120,23 +120,28 @@ export class HeadNavbarComponent implements OnInit, OnDestroy {
       let data = {
         action: "login",
         modalTitle: "Login First!",
-        text:
-          `In order to access the shopping cart or adding movies in the cart you have to login first.`,
+        text: `In order to access the shopping cart or adding movies in the cart you have to login first.`,
       };
       this.authService.sendLoginLogoutModalData(data);
       $("#loginLogoutModal").modal("show");
-    }else{
-      this.router.navigate(["cart"])
+    } else {
+      this.router.navigate(["cart"]);
     }
-
   }
 
-  closeNav(){
-    if(this.isMobileApp){
-      $('.navbar-collapse a').click(function(){
-        $(".navbar-collapse").collapse('hide');
-      });
-    }
+  // closeNav() {
+  //   if (this.isMobileApp) {
+  //     $(".navbar-collapse a").click(function () {
+  //       $(".navbar-collapse").collapse("hide");
+  //     });
+  //   }
+  // }
+
+  public navigate(commands: any[]): void {
+    this.ngZone
+      .run(() => this.router.navigate(commands))
+      .then(() => console.log("navigated"))
+      .catch((e) => console.log(e));
   }
 
   ngOnDestroy() {

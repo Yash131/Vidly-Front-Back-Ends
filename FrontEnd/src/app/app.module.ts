@@ -18,8 +18,6 @@ import { SignInComponent } from "./sign-in-sign-up/sign-in/sign-in.component";
 import { AdminPanelComponent } from "./admin/admin-panel/admin-panel.component";
 import { GenreListingComponent } from "./admin/control-genre/genre-listing/genre-listing.component";
 import { ControlMoviesComponent } from "./admin/control-movies/control-movies.component";
-import { ControlRentalsComponent } from "./admin/control-rentals/control-rentals.component";
-import { ControlCustomerComponent } from "./admin/control-customer/control-customer.component";
 import { ControlUsersComponent } from "./admin/control-users/control-users.component";
 import { ControlMessagesComponent } from "./admin/control-messages/control-messages.component";
 import { AuthService } from "./services/auth.service";
@@ -53,6 +51,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { FooterComponent } from './footer/footer.component';
 import { AccountActivateComponent } from './account-activate/account-activate.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
+import { ControlUpcomingMoviesComponent } from './admin/control-upcoming-movies/control-upcoming-movies.component';
+import { ControlOrdersComponent } from './admin/control-orders/control-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,8 +65,6 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
     AdminPanelComponent,
     GenreListingComponent,
     ControlMoviesComponent,
-    ControlRentalsComponent,
-    ControlCustomerComponent,
     ControlUsersComponent,
     ControlMessagesComponent,
     GenreFormComponent,
@@ -86,6 +84,8 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
     FooterComponent,
     AccountActivateComponent,
     ForgotPassComponent,
+    ControlUpcomingMoviesComponent,
+    ControlOrdersComponent,
 
   ],
   imports: [

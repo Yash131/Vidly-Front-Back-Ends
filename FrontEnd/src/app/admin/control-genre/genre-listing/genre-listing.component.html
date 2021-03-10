@@ -1,41 +1,74 @@
-<button class="btn btn-primary" routerLink="/adminPanel">Go Back</button>
-<button class="btn btn-primary" routerLink="/genres/form/new">Create Genre</button>
+<!-- <button class="btn btn-primary" >Go Back</button>
+<button class="btn btn-primary" routerLink="/genres/form/new">
+  Create Genre
+</button> -->
 
-<div class="container">
-  <div class="form-group">
-    <input type="text" (keyup)="filter($event.target.value)" #search id="search" class="form-control" placeholder="Serch Genre">
+<div class="container mt-5">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="main-breadcrumb box_shadow br-6">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="/adminPanel" routerLinkActive="router-link-active"
+          >Dashboard</a
+        >
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/genres/form/new" routerLinkActive="router-link-active"
+          >Add Genre</a
+        >
+      </li>
+      <li class="breadcrumb-item active">All Genres</li>
+    </ol>
+  </nav>
+  <!-- /Breadcrumb -->
+</div>
+
+<div class="container mt-5 mb-5">
+  <div class="card box_shadow br-6">
+    <div class="form-group p-4">
+      <input
+        type="text"
+        (keyup)="filter($event.target.value)"
+        #search
+        id="search"
+        class="form-control"
+        placeholder="Serch Genre"
+      />
+    </div>
+
+    <div class="container">
+      <table class="table con table-hover br-6 p-4">
+        <thead class="">
+          <tr>
+            <th scope="col">Genre Name</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let p of filteredGenre">
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-warning"
+                (click)="editBtnHandler(p._id)"
+              >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="delBtnHandler(p._id)"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Genre Name</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let p of filteredGenre">
-      <tr>
-        <td>{{ p.name }}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-warning"
-            (click)="editBtnHandler(p._id)"
-          >
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-        </td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="delBtnHandler(p._id)"
-          >
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>

@@ -21,6 +21,10 @@ export class UserService {
     );
   }
 
+  getAllusers(){
+    return this.httpClient.get(`${environment.api_url}users/all_users`)
+  }
+
   updatePassword(body) {
     return this.httpClient.post(
       `${environment.api_url}users/update-password`,

@@ -22,19 +22,34 @@ import { OrderSuccessPageComponent } from "./order-success-page/order-success-pa
 import { MyProfileComponent } from "./my-profile/my-profile.component";
 import { AccountActivateComponent } from "./account-activate/account-activate.component";
 import { ForgotPassComponent } from "./forgot-pass/forgot-pass.component";
+import { ControlUsersComponent } from "./admin/control-users/control-users.component";
+import { ControlUpcomingMoviesComponent } from "./admin/control-upcoming-movies/control-upcoming-movies.component";
+import { ControlOrdersComponent } from "./admin/control-orders/control-orders.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "movies", component: MoviesComponent },
   { path: "aboutUs", component: AboutUsComponent },
   { path: "contactUs", component: ContactUsComponent },
-  { path: "account-activation", component: AccountActivateComponent},
-  { path: "forgot-password", component: ForgotPassComponent},
-  { path: "cart", component: ShoppingCartComponent , canActivate : [AuthGuard]},
-  { path: "my-profile", component: MyProfileComponent , canActivate : [AuthGuard]},
-  { path: "my-orders", component: OrderComponent , canActivate : [AuthGuard]},
-  { path: "check-out", component: OrderCheckOutComponent , canActivate : [AuthGuard]},
-  { path: "order-success", component: OrderSuccessPageComponent , canActivate : [AuthGuard]},
+  { path: "account-activation", component: AccountActivateComponent },
+  { path: "forgot-password", component: ForgotPassComponent },
+  { path: "cart", component: ShoppingCartComponent, canActivate: [AuthGuard] },
+  {
+    path: "my-profile",
+    component: MyProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: "my-orders", component: OrderComponent, canActivate: [AuthGuard] },
+  {
+    path: "check-out",
+    component: OrderCheckOutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "order-success",
+    component: OrderSuccessPageComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: "user",
     component: SignInSignUpComponent,
@@ -85,11 +100,26 @@ const routes: Routes = [
     component: ControlMessagesComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
   },
-  { path : '**', component : HomeComponent }
+  {
+    path: "vidly_users",
+    component: ControlUsersComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
+  {
+    path: "upcoming_movies",
+    component: ControlUpcomingMoviesComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
+  {
+    path: "all_orders",
+    component: ControlOrdersComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
+  { path: "**", component: HomeComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

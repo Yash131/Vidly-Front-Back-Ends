@@ -1,3 +1,7 @@
 table{
     box-shadow: 2px black;
 }
+
+.breadcrumb{
+  background-color:white;
+}

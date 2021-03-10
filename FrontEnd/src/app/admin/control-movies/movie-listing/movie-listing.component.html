@@ -1,4 +1,4 @@
-<button style="margin-top: 10px" routerLink="/adminPanel" class="btn btn-dark">
+<!-- <button style="margin-top: 10px" routerLink="/adminPanel" class="btn btn-dark">
   <i
     class="fa fa-long-arrow-left"
     aria-hidden="true"
@@ -14,67 +14,31 @@
 >
   <i class="fa fa-plus-circle" aria-hidden="true" style="margin-right: 5px"></i
   >Movie
-</button>
-
-<!-- <div class="container">
-  <div class="card-group">
-    <div class="card text-center" *ngFor="let movie of movies" id="card">
-      <img class="card-img-top" [src]="movie.imageUrl" alt="" />
-
-      <span class="badge badge-info" style="border-radius: 0; font-weight: 500"
-        >Stock : {{ movie.numberInStock }}</span
-      >
-
-      <div class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
-
-        <div class="card-subtitle mb-2 text-muted">
-          <span> <b>Genre</b> : {{ movie.genre.name }} </span>,
-          <span><b>Rating</b> : {{ movie.rating }}/5</span>
-        </div>
-
-        <div class="card-text">
-          <span class="btn btn-transparent">
-            <b>Rental Rate</b> : {{ movie.dailyRentalRate | currency }}
-          </span>
-          <span class="btn btn-transparent">
-            <b>Price</b> : {{ movie.price | currency }}</span
-          >
-        </div>
-
-        <div>
-          <p class="card-text"><b>Summery</b> : {{ movie.summery }}</p>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div>
-          <a
-            (click)="trailerPopUp(movie.trailerUrl)"
-            class="btn btn-block btn-dark"
-          >
-            <i class="fa fa-youtube"></i> Watch Trailer</a
-          >
-        </div>
-      </div>
-      <div class="card-footer">
-        <div>
-          <a
-            style="margin-right: 40px"
-            (click)="editBtnHandler(movie._id)"
-            class="btn btn-warning"
-            >Edit</a
-          >
-          <a class="btn btn-danger" (click)="delBtnHandler(movie._id)"
-            >delete</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+</button> -->
 
 <div class="container mt-5">
-  <div class="card mb-5" *ngFor="let movie of movies">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="main-breadcrumb box_shadow br-6">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="/adminPanel" routerLinkActive="router-link-active"
+          >Dashboard</a
+        >
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/movies/form/new" routerLinkActive="router-link-active"
+          >Add Movie</a
+        >
+      </li>
+      <li class="breadcrumb-item active">All Movies</li>
+    </ol>
+  </nav>
+  <!-- /Breadcrumb -->
+</div>
+
+
+<div class="container mt-5">
+  <div class="card box_shadow br-6 mb-5" *ngFor="let movie of movies">
     <div class="row">
       <div class="col-12 col-sm-12 col-md-3 col-lg-3">
         <img [src]="movie.imageUrl" alt="" />
@@ -100,10 +64,10 @@
               >Stock : {{ movie.numberInStock }}</span
             >
             <div>
-              <div class="mt-1">
+              <div class="mt-1 py-2">
                 <button
                   (click)="trailerPopUp(movie.trailerUrl)"
-                  class="btn btn-dark"
+                  class="btn btn-outline-dark"
                 >
                   <i class="fa fa-youtube"></i> Watch Trailer
                 </button>
@@ -111,15 +75,15 @@
 
               <div class="mt-3">
                 <span>
-                  <div>
+                  <div class="d-flex py-2">
                     <button
                       (click)="editBtnHandler(movie._id)"
-                      class="btn mr-2"
+                      class="btn btn-outline-warning w-50 mr-2"
                     ><i class="fa fa-pencil" aria-hidden="true"></i>
                       Edit
                     </button>
                     <button
-                      class="btn"
+                      class="btn btn-outline-danger w-50"
                       (click)="delBtnHandler(movie._id)"
                     ><i class="fa fa-trash" aria-hidden="true"></i>
                       delete

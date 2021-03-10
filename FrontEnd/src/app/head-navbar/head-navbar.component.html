@@ -1,11 +1,15 @@
-<div class="navContainer box_shadow">
-  <nav
+<!-- <div class="navContainer box_shadow"> -->
+
+<nav class="navbar headers navbar-dark navbar-expand-lg  d-block" id="navbar">
+
+  <!-- brandlog with social links -->
+  <div
     id="header"
     class="navbar headers navbar-light"
     style="padding-top: 15px; padding-bottom: 15px"
   >
     <div id="brand">
-      <a class="navbar-brand" routerLink="">
+      <a class="navbar-brand d-contents" routerLink="">
         <svg
           id="logo"
           width="150"
@@ -88,12 +92,11 @@
         ><img src="../assets/icons/005-linkedin.png" alt=""
       /></a>
     </span>
-  </nav>
+  </div>
 
-  <nav
-    class="navbar headers navbar-dark navbar-expand-lg sticky-top"
-    id="navbar"
-  >
+  <!-- navbar -->
+
+  <div>
     <button
       class="navbar-toggler mb-3"
       type="button"
@@ -112,7 +115,7 @@
             class="nav-link"
             routerLink=""
             routerLinkActive="active"
-            (click)="closeNav()"
+
             >Home
           </a>
         </li>
@@ -121,7 +124,7 @@
             class="nav-link"
             routerLink="movies"
             routerLinkActive="active"
-            (click)="closeNav()"
+
             >Movies</a
           >
         </li>
@@ -130,7 +133,7 @@
             class="nav-link"
             routerLink="aboutUs"
             routerLinkActive="active"
-            (click)="closeNav()"
+
             >About Us</a
           >
         </li>
@@ -139,7 +142,7 @@
             class="nav-link"
             routerLink="contactUs"
             routerLinkActive="active"
-            (click)="closeNav()"
+
             >Contact Us</a
           >
         </li>
@@ -147,7 +150,7 @@
           <a
             class="nav-link cursor-p"
             routerLinkActive="active"
-            (click)="goToCart(); closeNav()"
+            (click)="goToCart()"
           >
             <!-- <i class="fa fa-shopping-cart px-1" aria-hidden="true"></i>
             Cart
@@ -169,7 +172,7 @@
               class="nav-link"
               routerLink="user/signIn"
               routerLinkActive="active"
-              (click)="closeNav()"
+
               >Login/Signup</a
             >
           </li>
@@ -178,8 +181,7 @@
         <div *ngIf="user; else anonymousUser" class="adminLinkWithUser">
           <li class="nav-item" *ngIf="user.isAdmin">
             <a
-              routerLink="adminPanel"
-              routerLinkActive="active"
+              [routerLink]="['/adminPanel']" routerLinkActive="router-link-active"
               id="dropDownLink"
               class="nav-link"
               >Admin Panel</a
@@ -191,10 +193,18 @@
               class="nav-link dropdown-toggle c-pointer"
               data-toggle="dropdown"
             >
-              {{ user.name
-              }}
-              <img *ngIf="user?.photo" [src]="user?.photo" alt="" class="userImg">
-              <i *ngIf="!user?.photo" class="fa fa-user-circle fa-lg px-1" aria-hidden="true"></i>
+              {{ user.name }}
+              <img
+                *ngIf="user?.photo"
+                [src]="user?.photo"
+                alt=""
+                class="userImg"
+              />
+              <i
+                *ngIf="!user?.photo"
+                class="fa fa-user-circle fa-lg px-1"
+                aria-hidden="true"
+              ></i>
             </a>
             <div class="dropdown-menu navDropDownMenu">
               <a
@@ -215,7 +225,7 @@
               <a
                 routerLink=""
                 id="dropDownLink"
-                (click)="logout();"
+                (click)="logout()"
                 class="dropdown-item"
                 >Logout</a
               >
@@ -224,5 +234,7 @@
         </div>
       </ul>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
+<!-- </div> -->
+

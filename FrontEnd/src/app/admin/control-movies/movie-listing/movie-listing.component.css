@@ -9,7 +9,7 @@ img {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-button {
+/* button {
   background-color: #fc85ae;
   border: 2px solid white;
   font-weight: 500px;
@@ -24,7 +24,7 @@ button:hover {
   color: #fc85ae;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
-}
+} */
 
 .badge {
   background-color: #fc85ae;

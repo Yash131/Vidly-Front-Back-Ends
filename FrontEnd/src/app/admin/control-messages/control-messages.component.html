@@ -1,36 +1,83 @@
-<button class="btn btn-primary" routerLink="/adminPanel">Go Back</button>
+<button class="btn btn-outline-dark px-4 m-3" routerLink="/adminPanel">
+  Back
+</button>
 
-<div class="container">
-  <div class="form-group">
-    <input type="text" (keyup)="filter(search.value)" #search id="search" class="form-control" placeholder="Serch Genre">
+<div class="container mt-5 mb-5">
+  <div class="card box_shadow br-6">
+    <div class="form-group p-4 mt-3 mb-3">
+      <input
+        type="text"
+        (keyup)="filter(search.value)"
+        #search
+        id="search"
+        class="form-control"
+        placeholder="search message by name.."
+      />
+    </div>
+
+    <div class="container">
+      <table class="table tabel-bordered table-hover br-6 p-4 messageboxDesk">
+        <thead class="">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Message</th>
+            <th scope="col">Date</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let p of filteredContact">
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.email }}</td>
+            <td>{{ p.message }}</td>
+            <td>{{ p.date | date }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="delBtnHandler(p._id)"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container mb-5">
+      <div class="card messageboxMob box_shadow">
+        <ng-container *ngFor="let user of filteredContact">
+          <div class="card-header bg-dark text-light">
+            <div>
+              <span class=""> <b>Name :</b> {{ user?.name }}</span>
+              <span class="float-right">
+                <small>{{ user.date | date }}</small>
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div>
+              <p><b>Email : </b>{{ user?.email }}</p>
+            </div>
+            <div>
+              <p><b>Message : </b>{{ user?.message }}</p>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <button
+              type="button"
+              class="btn btn-outline-danger w-100"
+              (click)="delBtnHandler(user._id)"
+            >
+              <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+              Delete Message
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
   </div>
-
-  <table class="table tabel-bordered  table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Message</th>
-        <th scope="col">Date</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let p of filteredContact">
-      <tr>
-        <td>{{ p.name }}</td>
-        <td>{{ p.email }}</td>
-        <td>{{ p.message }}</td>
-        <td>{{ p.date | date}}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="delBtnHandler(p._id)"
-          >
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>

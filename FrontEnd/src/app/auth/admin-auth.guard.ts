@@ -15,25 +15,34 @@ import { User } from "../models/user";
   providedIn: "root",
 })
 export class AdminAuthGuard implements CanActivate {
-  user: boolean;
+  user: any;
+  isAdmin:boolean = false;
   constructor(
     private authService: AuthService,
     private router: Router,
     private jwtService: JwtService
   ) {
-    this.authService.getCurrentUser().subscribe(
-      (data) => {
-        this.user = data.isAdmin;
-      }
-    );
+    // this.authService.getCurrentUser().subscribe(
+    //   (data) => {
+    //     this.user = data.isAdmin;
+    //   }
+    // );
+    this.userData()
   }
 
-  // ngOnInit() {
-  //   this.adminCheck();
-  // }
-  // adminCheck() {
-  
-  // }
+
+  async userData(){
+    this.user = this.authService.getUserPayload()
+    // console.log(this.user)
+    if(this.user){
+      return this.isAdmin = this.user?.isAdmin;
+    }else{
+      return this.isAdmin = false;
+    }
+
+  }
+
+
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -43,7 +52,7 @@ export class AdminAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.user === true) {
+    if (this.isAdmin === true) {
       return true;
     }
     this.router.navigateByUrl("");

@@ -23,7 +23,9 @@ export class HomeComponent implements OnInit {
   getUpcominMovie(){
     this.moviesService.getUpcomingMovies().subscribe( (res:any) => {
       this.upComminMovies = res
-      console.log(res)
+      // console.log(res)
+    },(err) =>{
+      console.log(err)
     } )
   }
 
