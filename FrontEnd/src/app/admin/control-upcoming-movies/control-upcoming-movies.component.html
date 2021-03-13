@@ -1,4 +1,52 @@
+<app-loader *ngIf="isLoading"></app-loader>
 <button class="btn btn-outline-dark px-4 m-3"  routerLink="/adminPanel">Back</button>
-<div class="container minH_100vh">
 
+
+<div class="container">
+  <div class="card box_shadow mb-5 mt-5 br-6 p-5" style="overflow: hidden">
+    <h2 class="text-center mb-4 m-auto p-4 heading">Upcoming Movies</h2>
+
+  </div>
 </div>
+
+
+<div class="moviecontainer d-flex justify-content-center">
+  <div class="movie-card" *ngFor="let movie of upcomingMovies">
+    <div class="movie-header manOfSteel" [ngStyle]="{'background-image': 'url(' + movie?.posterURL + ')'}">
+      <div class="header-icon-container">
+        <a (click)="trailerPopUp(movie?.trailerURL)">
+          <i class="material-icons header-icon"></i>
+        </a>
+      </div>
+    </div><!--movie-header-->
+    <div class="movie-content">
+      <div class="movie-content-header" >
+        <a href="#">
+          <h3 class="movie-title">{{movie?.title}}</h3>
+        </a>
+        <div class="imax-logo"></div>
+      </div>
+      <div class="movie-info">
+        <div class="info-section">
+          <label>Release Date</label>
+          <span>{{movie?.releaseDate}}</span>
+        </div>
+        <div class="info-section">
+          <label></label>
+          <span></span>
+        </div>
+        <div class="info-section">
+          <label></label>
+          <span></span>
+        </div>
+        <div class="info-section">
+          <label></label>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -78,9 +78,11 @@ body {
 }
 
 .heading{
-  border-bottom: 4px solid #fc85ae;
+  border: 4px solid #fc85ae;
+  border-radius: 15px 50px;
   display: inline;
   font-weight: 700;
+  padding: 15px;
 }
 
 .minH_100vh{
@@ -92,4 +94,21 @@ body {
 }
 .breadcrumb a {
   color: skyblue;
+}
+
+.circle{
+    border-radius: 50%;
+    background-color: #39f739;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    margin-top: 3px;
+    margin-right: 5px;
+}
+
+@media(max-width:567px){
+  .circle{
+    position: absolute !important;
+    left: 9% !important;
+  }
 }

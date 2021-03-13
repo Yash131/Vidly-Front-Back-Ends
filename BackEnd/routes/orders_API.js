@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User } = require("../models/user_model");
 const { Order } = require("../models/order_model");
 const auth = require("../middlewares/auth");
+const admin = require("../middlewares/admin");
 
 router.post("/", auth, async (req, res) => {
   let {
@@ -102,6 +103,82 @@ router.get("/order_counter", auth, async (req, res) => {
     status: "Success",
     data: data,
   });
+});
+
+router.get("/all_orders", [auth, admin], async (req, res) => {
+
+  let allorders = await Order.find()
+  let liveorders = await Order.find({ orderStatus: "Placed" }).sort("-createdAt");
+  let cancelledOrders = await Order.find({ orderStatus: "Cancelled" }).sort("-createdAt");
+  let shippedOrders = await Order.find({ orderStatus: "Shipped" }).sort("-createdAt");
+  let completedOrders = await Order.find({ orderStatus: "Completed" }).sort("-createdAt");
+
+  if (!liveorders.length || !allorders.length ) {
+    return res.status(404).send({ message: "No Order's Found!" });
+  }
+  res.send({
+    all_orders : allorders,
+    total_cancelled_orders: cancelledOrders.length,
+    total_live_orders: liveorders.length,
+    total_shipped_orders: shippedOrders.length,
+    total_completed_orders: completedOrders.length,
+    all_live_orders: liveorders,
+    all_cancelled_orders: cancelledOrders,
+    all_shipped_orders : shippedOrders,
+    all_completed_orders : completedOrders,
+    status: "success",
+  });
+});
+
+router.post("/cancel_order_by_id", [auth, admin], async (req, res) => {
+  const orderID = req.body.orderID;
+
+  let updateOrder = await Order.findOneAndUpdate(
+    { _id: orderID },
+    { orderStatus: "Cancelled" },
+    {
+      new: true,
+    }
+  );
+
+  if (!updateOrder) {
+    return res.status(404).send({ message: "Order not found" });
+  }
+  updateOrder = await updateOrder.save();
+
+  console.log(updateOrder.orderStatus);
+
+  return res.send({
+    message: "Order Cancelled Successfully",
+    data: updateOrder,
+  });
+
+});
+
+router.post("/changeOrderStatus", [auth, admin], async (req, res) => {
+  const {orderID, orderStatus }= req.body;
+  
+
+  let updateOrder = await Order.findOneAndUpdate(
+    { _id: orderID },
+    { orderStatus: orderStatus },
+    {
+      new: true,
+    }
+  );
+
+  if (!updateOrder) {
+    return res.status(404).send({ message: "Order not found" });
+  }
+  updateOrder = await updateOrder.save();
+
+  console.log(updateOrder.orderStatus);
+
+  return res.send({
+    message: "Order status Changed Successfully",
+    data: updateOrder,
+  });
+
 });
 
 module.exports = router;

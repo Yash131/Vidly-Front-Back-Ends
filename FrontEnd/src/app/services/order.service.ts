@@ -42,4 +42,15 @@ export class OrderService {
     return this.http.get(`${environment.api_url}orders/order_counter`)
   }
 
+  allLiveOrders(){
+    return this.http.get(`${environment.api_url}orders/all_orders`)
+  }
+
+  cancel_order_by_id(data){
+    return this.http.post(`${environment.api_url}orders/cancel_order_by_id`, data)
+  }
+
+  changeOrderStatus(data){
+    return this.http.post(`${environment.api_url}orders/changeOrderStatus`, data)
+  }
 }

@@ -1,4 +1,266 @@
-<button class="btn btn-outline-dark px-4 m-3"  routerLink="/adminPanel">Back</button>
-<div class="container minH_100vh">
-  <p>control-orders works!</p>
+<button class="btn btn-outline-dark px-4 m-3" routerLink="/adminPanel">
+  Back
+</button>
+
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="container minH_100vh mb-5 mt-5">
+  <div *ngIf="orders?.all_live_orders?.length">
+    <!-- Live Orders -->
+
+    <div>
+      <div class="card box_shadow mb-5 mt-5 br-6 p-5" style="overflow: hidden">
+        <h2 class="text-center mb-4 m-auto p-4 heading">All Live Orders</h2>
+
+        <table class="table box_shadow br-6 mb-4 mt-5">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th scope="col">Total Orders</th>
+              <th scope="col">Placed Orders</th>
+              <th scope="col">Shipped Orders</th>
+              <th scope="col">Completed Orders</th>
+              <th scope="col">Cancelled Orders</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr class="bg-white">
+              <td>{{ orders?.all_orders?.length }}</td>
+              <td>
+                {{ orders?.total_live_orders }}
+              </td>
+              <td>{{ orders?.total_shipped_orders }}</td>
+              <td>{{ orders?.total_completed_orders }}</td>
+              <td>{{ orders?.total_cancelled_orders }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
+      </div>
+
+      <div class="container orderContainer" style="overflow: hidden">
+        <ng-container *ngFor="let order of orders?.all_orders">
+          <mat-accordion>
+            <mat-expansion-panel
+              class="mb-3"
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-description>
+                  <div
+                    class="circle"
+                    [attr.data-tooltip]="'Order Status: ' + order?.orderStatus"
+                    [ngClass]="{
+                      'dot-green': order?.orderStatus == 'Placed',
+                      'dot-blue': order?.orderStatus == 'Shipped',
+                      'dot-pink': order?.orderStatus == 'Completed',
+                      'dot-red': order?.orderStatus == 'Cancelled'
+                    }"
+                  ></div>
+
+                  <b>Placed On :</b>
+                  <span class="px-1">{{
+                    order?.createdAt | date: "MMMM d, y, h:mm:ss a"
+                  }}</span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-12 col-md-6 mt-3">
+                  <ul class="list-group list-group-flush box_shadow">
+                    <li
+                      *ngFor="let item of order?.products"
+                      class="list-group-item"
+                    >
+                      <div class="float-left">
+                        <span class="px-1">
+                          <img class="productImg" [src]="item?.image" alt="" />
+                        </span>
+                        <span class="px-1">{{ item?.title }}</span>
+                      </div>
+                      <div class="float-right">
+                        {{ item?.price | currency }}
+                      </div>
+                    </li>
+                    <li class="list-group-item font-weight-bold align-middle">
+                      Total
+                      <div class="float-right align-middle">
+                        {{ order?.totalPrice | currency }}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-12 col-md-6 mt-3">
+                  <ul class="list-group list-group-flush box_shadow">
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Order ID : </b
+                            ><span class="px-1">{{ order?._id }} </span>
+                          </span>
+                        </div>
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Payment RefID : </b
+                            ><span class="px-1">{{
+                              order?.paymentModeData?.id
+                            }}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-12 px-1">
+                          <span class="px-1">
+                            <b>Placed By : </b
+                            ><span class="px-1"
+                              >{{ order?.userDetails?.name }}
+                            </span>
+                          </span>
+                        </div>
+
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Mobile : </b
+                            ><span class="px-1"
+                              >{{ order?.shippingDetails.mobile }}
+                            </span>
+                          </span>
+                        </div>
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Email : </b
+                            ><span class="px-1">{{
+                              order?.shippingDetails.email
+                            }}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Order Status : </b>
+                            <span class="px-1">{{ order?.orderStatus }} </span>
+                            <!-- <span>
+                              <ng-select
+                                class="d-inline-block inNgSelect drop_down_config margtop marright-ng-sel drop_down_set"
+                                [items]="orderStatus"
+                                dropdownPosition="bottom"
+                                bindLabel="id"
+                                bindValue="id"
+                                [clearable]="false"
+                                placeholder="{{ 'Change Order Status' }}"
+                                [(ngModel)]="selectedStatus"
+                              >
+                              </ng-select>
+                            </span> -->
+                          </span>
+                        </div>
+                        <div class="col-12 px-2">
+                          <span class="">
+                            <b>Payment Mode : </b
+                            ><span class="px-1">{{ order?.paymentMode }}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-12 px-2">
+                          <b>Shipping Details : </b>
+                        </div>
+                        <div class="col-12 px-2 mt-1">
+                          <small>
+                            <b>
+                              {{ order?.shippingDetails.name }}
+                              {{ order?.shippingDetails.addressLine1 }}
+                              {{ order?.shippingDetails.addressLine2 }}
+                            </b>
+                          </small>
+                        </div>
+                      </div>
+                    </li>
+
+                    <ng-container *ngIf="order?.orderStatus != 'Cancelled'">
+                      <li
+                        class="list-group-item btnList"
+                        *ngIf="order.orderStatus != 'Completed'"
+                      >
+                        <button
+                          class="btn btn-outline-danger"
+                          (click)="cancelOrder(order)"
+                        >
+                          Cancel Order
+                        </button>
+                        <button
+                          class="btn btn-outline-primary"
+                          (click)="orderInfo(order)"
+                          data-toggle="modal"
+                          data-target=".bd-example-modal-sm"
+                        >
+                          Change Order Status
+                        </button>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!orders?.all_live_orders?.length" class="container mb-5 mt-5">
+    <div class="card p-5 box_shadow">
+      <h3 class="text-center">No Orders Found!</h3>
+    </div>
+  </div>
+</div>
+
+<!-- Small modal -->
+<div
+  class="modal fade bd-example-modal-sm"
+  id="changeStatus"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="changeStatus"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="text-center">Change Order Status To...</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button
+          class="btn btn-outline-primary w-100 mt-2 mb-2"
+          (click)="changeStatus('Shipped')"
+        >
+          Shipped
+        </button>
+        <button
+          class="btn btn-outline-pink w-100 mt-2 mb-2"
+          (click)="changeStatus('Completed')"
+        >
+          Completed
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
