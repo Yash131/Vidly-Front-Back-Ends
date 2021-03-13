@@ -34,4 +34,12 @@ export class MoviesService {
   getUpcomingMovies(){
     return this.httpClient.get(`${environment.api_url}upcoming-movie/get`);
   }
+
+  addUpcomingMovies(data){
+    return this.httpClient.post(`${environment.api_url}upcoming-movie/add`,data);
+  }
+
+  deleteUpcomingMovies(id){
+    return this.httpClient.delete(`${environment.api_url}upcoming-movie/delete/${id}`);
+  }
 }
