@@ -35,24 +35,25 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from "ng-recaptcha";
 // import { NgxWhastappButtonModule } from "ngx-whatsapp-button";
-import { CookieService } from 'ngx-cookie-service';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { HeadNavbarComponent } from './head-navbar/head-navbar.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginOrLogoutAlertModalComponent } from './popups/login-or-logout-alert-modal/login-or-logout-alert-modal.component';
-import { OrderComponent } from './order/order.component';
-import { OrderCheckOutComponent } from './order-check-out/order-check-out.component';
-import { PayPalCheckoutComponent } from './pay-pal-checkout/pay-pal-checkout.component';
-import { OrderSuccessPageComponent } from './order-success-page/order-success-page.component';
-import { LoaderComponent } from './loader/loader.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { MyProfileComponent } from './my-profile/my-profile.component';
-import { FooterComponent } from './footer/footer.component';
-import { AccountActivateComponent } from './account-activate/account-activate.component';
-import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
-import { ControlUpcomingMoviesComponent } from './admin/control-upcoming-movies/control-upcoming-movies.component';
-import { ControlOrdersComponent } from './admin/control-orders/control-orders.component';
+import { CookieService } from "ngx-cookie-service";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { HeadNavbarComponent } from "./head-navbar/head-navbar.component";
+import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { LoginOrLogoutAlertModalComponent } from "./popups/login-or-logout-alert-modal/login-or-logout-alert-modal.component";
+import { OrderComponent } from "./order/order.component";
+import { OrderCheckOutComponent } from "./order-check-out/order-check-out.component";
+import { PayPalCheckoutComponent } from "./pay-pal-checkout/pay-pal-checkout.component";
+import { OrderSuccessPageComponent } from "./order-success-page/order-success-page.component";
+import { LoaderComponent } from "./loader/loader.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MyProfileComponent } from "./my-profile/my-profile.component";
+import { FooterComponent } from "./footer/footer.component";
+import { AccountActivateComponent } from "./account-activate/account-activate.component";
+import { ForgotPassComponent } from "./forgot-pass/forgot-pass.component";
+import { ControlUpcomingMoviesComponent } from "./admin/control-upcoming-movies/control-upcoming-movies.component";
+import { ControlOrdersComponent } from "./admin/control-orders/control-orders.component";
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,12 +87,12 @@ import { ControlOrdersComponent } from './admin/control-orders/control-orders.co
     ForgotPassComponent,
     ControlUpcomingMoviesComponent,
     ControlOrdersComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ChartsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -102,7 +103,6 @@ import { ControlOrdersComponent } from './admin/control-orders/control-orders.co
     NgSelectModule,
     NgbModule,
     MatExpansionModule,
-
   ],
   providers: [
     GenresService,
@@ -116,8 +116,11 @@ import { ControlOrdersComponent } from './admin/control-orders/control-orders.co
       useClass: HttpInterceptorService,
       multi: true,
     },
-    { provide: RECAPTCHA_V3_SITE_KEY, useValue: "6LchgTIaAAAAAFfYa3CzqjQ4_knFZNLLSlhxfF5B" },
-    CookieService
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: "6LchgTIaAAAAAFfYa3CzqjQ4_knFZNLLSlhxfF5B",
+    },
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

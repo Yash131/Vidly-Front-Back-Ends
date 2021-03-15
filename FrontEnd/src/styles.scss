@@ -106,6 +106,10 @@ body {
     margin-right: 5px;
 }
 
+.justify-spaceBet{
+  justify-content: space-between
+}
+
 @media(max-width:567px){
   .circle{
     position: absolute !important;

@@ -1,3 +1,4 @@
+<app-loader *ngIf="isLoading"></app-loader>
 <div class="container mt-5">
   <div class="btn-group dropright">
     <button type="button" class="btn btn-outline-dark">Controls</button>
@@ -13,10 +14,173 @@
     <div class="dropdown-menu">
       <a class="dropdown-item" routerLink="/genres/listing">Genres</a>
       <a class="dropdown-item" routerLink="/movies/listing">Movies</a>
-      <a class="dropdown-item" routerLink='/upcoming_movies'>Upcoming Movies</a>
+      <a class="dropdown-item" routerLink="/upcoming_movies">Upcoming Movies</a>
       <a class="dropdown-item" routerLink="/all_orders">Orders</a>
       <a class="dropdown-item" routerLink="/vidly_users">Users</a>
       <a class="dropdown-item" routerLink="/messages">Messages</a>
+    </div>
+  </div>
+
+  <div class="mt-5 mb-5">
+    <!-- analytics -->
+    <div class="row mt-3 mb-3">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card box_shadow br-6 p-0 mb-3">
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{ this.basicInfos?.totalRevenue | currency }}</h4>
+              <h4>Revenue</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/002-revenue.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card box_shadow br-6 p-0 mb-3">
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{ this.basicInfos?.totalExpense | currency }}</h4>
+              <h4>Expenses</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/001-expenses.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card box_shadow br-6 p-0 mb-3">
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>
+                {{
+                  this.basicInfos?.totalRevenue - this.basicInfos?.totalExpense
+                    | currency
+                }}
+              </h4>
+              <h4>Profit</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/003-profit.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card box_shadow br-6 p-0 mb-3">
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{ 0 | currency }}</h4>
+              <h4>Loss</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/004-loss.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- basic info -->
+    <div class="row mt-3 mb-3">
+      <div class="col-12 col-md-4">
+        <div
+          class="card box_shadow br-6 p-0 mb-3 c-pointer"
+          routerLink="/vidly_users"
+        >
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{this.basicInfos?.totalUsers}}</h4>
+              <h4>Users</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/001-verify.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div
+          class="card box_shadow br-6 p-0 mb-3 c-pointer"
+          routerLink="/all_orders"
+        >
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{this.basicInfos?.totalOrders}}</h4>
+              <h4>Orders</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/002-online-shopping.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div
+          class="card box_shadow br-6 p-0 mb-3 c-pointer"
+          routerLink="/messages"
+        >
+          <div class="card-body p-4 d-flex justify-spaceBet">
+            <div class="">
+              <h4>{{this.basicInfos?.totalMessages}}</h4>
+              <h4>Messages</h4>
+            </div>
+            <div class="">
+              <img src="../../../assets/icons/message.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="card box_shadow br-6">
+          <div class="card-body">
+              <canvas
+                baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+              >
+              </canvas>
+            <!-- <button class="mt-3" mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="card box_shadow br-6">
+          <div class="card-body p-1">
+            <!-- <div class="chart">
+              <canvas
+                baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [colors]="pieChartColors"
+                [legend]="pieChartLegend"
+              >
+              </canvas>
+            </div> -->
+            <div>
+              <!-- <button mat-button mat-raised-button color="primary" (click)="pieChartLegend=!pieChartLegend">Toggle Legend</button>
+              <button mat-button mat-raised-button color="primary" (click)="changeLabels()">Change Labels</button>
+              <button mat-button mat-raised-button color="primary" (click)="addSlice()">Add Slice</button>
+              <button mat-button mat-raised-button color="primary" (click)="removeSlice()">Remove Slice</button>
+              <button mat-button mat-raised-button color="primary" (click)="changeLegendPosition()">Change Legend Position</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
